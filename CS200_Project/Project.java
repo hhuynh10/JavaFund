@@ -9,7 +9,6 @@ public class Project
         {
             System.out.println("gberf");
             System.out.println("testing again");
-            System.out.println("again");
 				
 				
          } //closing main method
