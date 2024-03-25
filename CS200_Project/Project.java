@@ -222,5 +222,13 @@ public class Project {
     } while (userPoints <= 0 || userPoints >= 150);
     
   } // closing main method
+
+  public static int factorial (int num){
+    int total = 1;
+    for (int i = num; i > 0; i--){
+        total *= i;
+    }
+    return total;
+}
 }
 // closing class header
