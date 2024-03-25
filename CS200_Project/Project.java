@@ -104,7 +104,7 @@ public class Project {
 
         // intializing game data
             userPoints = 50;
-            userAttempts = 2; 
+             
     // Medium questions
     // Question 1
     length = Double.parseDouble(fm.format(Math.random() * 10));
@@ -119,6 +119,8 @@ public class Project {
 
     // display results as required by program specifications
     do{
+
+      userAttempts = 2;
     System.out.print("Would you like to choose easy, medium or hard question?\n" + "(E)asy, (M)edium, or (H)ard? ");
       userAns = input.nextLine().toLowerCase();
     
