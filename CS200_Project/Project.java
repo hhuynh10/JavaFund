@@ -1,5 +1,6 @@
 //import API's needed here:
 import java.util.Scanner;
+import java.util.Random;
 import java.text.DecimalFormat;
 
 public class Project {
@@ -21,14 +22,15 @@ public class Project {
     // create any objects if needed (i.e. scanner for keyboard input)
     Scanner input = new Scanner(System.in);
     DecimalFormat fm = new DecimalFormat("0.00");
+    Random mystery = new Random();
 
     // declare data storage space (constants and variables)
     final int EASY = 10; // Points for easy questions
     final int MEDIUM = 15; // Points for medium questions
     final int HARD = 20; // Point for hard questions
 
-    int userPoints = 50; // User's starting points
-    int userAttempts = 2; // User's attempts for each question
+    int userPoints; // User's starting points
+    int userAttempts; // User's attempts for each question
 
     String welcome = "Welcome to Java Beans' Project"; // Welcoming string
 
@@ -65,6 +67,7 @@ public class Project {
     int number3; // number 3
     int number4; // number 4
     int number5; // number 5
+    int r = 9;  //multiplies with random object
     float userAnswer; // User Answer
     float avg; // Average
 
@@ -83,7 +86,6 @@ public class Project {
 
     // get input as required by program specifications
     System.out.println(welcome);
-
     System.out.print("Would you like to go over the game rules?\n" + "(Y)es or (N)o? ");
     userAns = input.nextLine().toLowerCase();
 
@@ -96,16 +98,13 @@ public class Project {
         System.out.println(gameRules);
     }
 
-    // process data as required by program specificationsn
-    // Easy questions
-    // Question 1
-    number1 = (int) (Math.random() * 10);
-    number2 = (int) (Math.random() * 10);
-    number3 = (int) (Math.random() * 10);
-    number4 = (int) (Math.random() * 10);
-    number5 = (int) (Math.random() * 10);
-    avg = (float) (number1 + number2 + number3 + number4 + number5) / 5;
 
+    do{
+    
+
+        // intializing game data
+            userPoints = 50;
+            userAttempts = 2; 
     // Medium questions
     // Question 1
     length = Double.parseDouble(fm.format(Math.random() * 10));
@@ -119,9 +118,20 @@ public class Project {
     volume = Double.parseDouble(fm.format(Math.PI * Math.pow(radius, 2) * height));
 
     // display results as required by program specifications
+    do{
     System.out.print("Would you like to choose easy, medium or hard question?\n" + "(E)asy, (M)edium, or (H)ard? ");
       userAns = input.nextLine().toLowerCase();
-    do {
+    
+// process data as required by program specifications
+    // Easy questions
+    // Question 1
+    number1 = mystery.nextInt(r);
+    number2 = mystery.nextInt(r);
+    number3 = mystery.nextInt(r);
+    number4 = mystery.nextInt(r);
+    number5 = mystery.nextInt(r);
+    avg = (float) (number1 + number2 + number3 + number4 + number5) / 5;
+
       if (userAns.length() > 0 && userAns.charAt(0) == 'e') {
         // question 1
         System.out.print("What is the average of the following numbers, answer in nearest tenth: " + number1 + " " + number2 + " " + number3 + " " + number4 + " " + number5 + " ?\n" + "Your answer: ");
@@ -148,6 +158,7 @@ public class Project {
                           System.out.println("Your current points: " + userPoints);
                       }
                     }
+
                   }
                   userAttempts--;
               }
@@ -173,7 +184,7 @@ public class Project {
                   }
                 }
               }
-
+              //MEDIUM QUESTIONS
       } else if (userAns.length() > 0 && userAns.charAt(0) == 'm') {
         // Question 1
         System.out.print("Calculate the area of a rectangle given its length and width\n" + "Length: " + length + ", Width: " + width + "\nYour answer: ");
@@ -204,23 +215,29 @@ public class Project {
           System.out.println("Your current points: " + userPoints);
         }
       }
+      input.nextLine();
+
+
+      
     } while (0 < userPoints && userPoints < 150 );
 
-    do {
+    
+
+
       userPoints = 50;
       userAttempts = 2;
       hints = 2;
 
-      System.out.print("Do you want to (R)estart or (E)xit the game? ");
+      System.out.print("Do you want to (R)estart or press any key to exit? ");
       userAns = input.nextLine().toLowerCase();
       if (userAns.length() > 0 && userAns.charAt(0) == 'r'){
         System.out.println("Game restarting now!");
-      } else if (userAns.length() > 0 && userAns.charAt(0) == 'e') {
-        System.out.println("Game exiting now!");
-        System.exit(0);
       }
-    } while (userPoints <= 0 || userPoints >= 150);
+    } while (userAns.length() > 0 && userAns.charAt(0)== 'r');
     
+
+    System.out.println("Thanks for playing!");
+
   } // closing main method
 
   public static int factorial (int num){
@@ -231,4 +248,4 @@ public class Project {
     return total;
 }
 }
-// closing class header
+// closing class header`
