@@ -223,12 +223,14 @@ public class Project {
     
   } // closing main method
 
+
+  // Methods
   public static int factorial (int num){
     int total = 1;
     for (int i = num; i > 0; i--){
         total *= i;
     }
     return total;
-}
+  }
 }
 // closing class header
