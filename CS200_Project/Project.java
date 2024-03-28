@@ -216,6 +216,7 @@ public class Project {
           userPoints -= HARD;
           System.out.println("Your current points: " + userPoints);
         }
+
       }
       input.nextLine();
 
@@ -251,3 +252,7 @@ public class Project {
 }
 }
 // closing class header`
+
+
+
+System.out.println("hdsfgfd");
