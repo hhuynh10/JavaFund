@@ -250,6 +250,7 @@ public class Project {
     for (int i = num; i > 0; i--){
         total *= i;
     }
+    System.out.println("test");
     return total;
   }
 }
