@@ -4,15 +4,15 @@ public class Problem
 {  
     public static void main(String[] args) 
     {
-        int numOfPentagonal = 100;
-        int intPerLine = 10;
+        int NUM_OF_PENT = 100;
+        int NUM_PER_LINE = 10;
         int count = 0;
 
-        for (int i = 1; i <= numOfPentagonal; i++){
+        for (int i = 1; i <= NUM_OF_PENT; i++){
             int pentagonalNumber = getPentagonalNumber(i);
             System.out.printf("%7d", pentagonalNumber);
             count++;
-            if (count % intPerLine == 0){
+            if (count % NUM_PER_LINE == 0){
                 System.out.println();
             }
         }
