@@ -16,8 +16,8 @@ public class Problem{
         usingChar = input.next().charAt(0);
 
         for (i = 0; i < userString.length(); i++) {
-               if (Character.toLowerCase(usingChar) == Character.toLowerCase(userString.charAt(i))) {
-                   if (!isFirstMatch) {
+            if (Character.toLowerCase(usingChar) == Character.toLowerCase(userString.charAt(i))) {
+                if (!isFirstMatch) {
                     System.out.print(", ");
                     }
                     System.out.print(i + 1);

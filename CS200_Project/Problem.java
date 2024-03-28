@@ -1,7 +1,8 @@
+package JavaFund.CS200_Project;
 //import API's needed here:
 import java.util.Scanner;
 
-public class Problem {
+public class Problem {  
 
     public static void main(String args[]) {
         String userInput;
@@ -18,6 +19,9 @@ public class Problem {
             } else {
                 System.out.print(currentChar);
             }
+        }
+        if (userInput.isEmpty()){
+            System.out.println("Nothing");
         }
     } //closing main method
 
@@ -65,9 +69,6 @@ public class Problem {
             case 'y':
             case 'z':
                 num = 9;
-                break;
-            default:
-                System.out.println("Invalid Input");
                 break;
         }
         return num;
