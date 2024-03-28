@@ -251,6 +251,7 @@ public class Project {
         total *= i;
     }
     System.out.println("test");
+    System.out.println("Test 2. - Jackie");
     return total;
   }
 }
