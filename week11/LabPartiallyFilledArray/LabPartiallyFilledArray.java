@@ -10,6 +10,7 @@ public class LabPartiallyFilledArray
 	
 	//total number of quiz scores possible in CS 200
 	final int MAX_SIZE = 10;  
+	System.out.println((char)69);
 
 	//Create (declare & instantiate) an int array of size 10, called: quizScores
 
