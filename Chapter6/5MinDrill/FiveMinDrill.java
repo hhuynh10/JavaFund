@@ -1,5 +1,4 @@
 //import API's needed here:
-
 public class FiveMinDrill 
 {  
         public static void main(String args[ ]) 
