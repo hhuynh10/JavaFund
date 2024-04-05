@@ -1,9 +1,22 @@
 //import API's needed here:
+import java.util.Scanner;
 public class FiveMinDrill 
 {  
         public static void main(String args[ ]) 
-        {
-                countEights(-8, 18, -88888, 8, 488); 
+        {       
+                Scanner input = new Scanner(System.in);
+                System.out.println("Enter number 1: ");
+                int num1 = input.nextInt();
+                System.out.println("Enter number 2: ");
+                int num2 = input.nextInt();
+                System.out.println("Enter number 3: ");
+                int num3 = input.nextInt();
+                System.out.println("Enter number 4: ");
+                int num4 = input.nextInt();
+                System.out.println("Enter number 5: ");
+                int num5 = input.nextInt();
+                
+                countEights(num1, num2, num3, num4, num5); 
          } //closing main method
 
         public static int countEights(int a, int b, int c, int d, int e){

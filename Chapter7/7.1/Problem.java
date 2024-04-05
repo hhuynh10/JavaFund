@@ -1,6 +1,4 @@
 //import API's needed here:
-import java.lang.reflect.Array;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Problem
@@ -11,11 +9,26 @@ public class Problem
                 Scanner input = new Scanner(System.in);
                 System.out.print("Enter the number of students: ");
                 userInput = new int[input.nextInt()];
-
+                
+                int maxScore = userInput[0];
+                System.out.print("Enter " + userInput.length + " scores: ");
                 for (int i = 0; i < userInput.length; i++){
-                        System.out.print("Enter " + userInput.length + " scores: ");
                         userInput[i] = input.nextInt();
+                        maxScore = Math.max(maxScore, userInput[i]);
                 }
-		System.out.println(Arrays.toString(userInput));
+
+		for (int i = 0; i < userInput.length; i++){
+                        if (userInput[i] >= maxScore - 10){
+                                System.out.println("Student " + i + " score is " + userInput[i] + " and grade is A");
+                        } else if (userInput[i] >= maxScore - 20){
+                                System.out.println("Student " + i + " score is " + userInput[i] + " and grade is B");
+                        } else if (userInput[i] >= maxScore - 30){
+                                System.out.println("Student " + i + " score is " + userInput[i] + " and grade is C");
+                        } else if (userInput[i] >= maxScore - 40){
+                                System.out.println("Student " + i + " score is " + userInput[i] + " and grade is D");
+                        } else {
+                                System.out.println("Student " + i + " score is " + userInput[i] + " and grade is F");
+                        }
+                }
          } //closing main method
 } //closing class header
