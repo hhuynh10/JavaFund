@@ -19,11 +19,13 @@ public class Problem
         
         public static double min(double[] arr){
                 double min = arr[0];
+                int minIndex = 0;
                 for (int i = 0; i < arr.length; i++){
                         if (min > arr[i]){
                                 min = arr[i];
+                                minIndex = i;
                         }
                 }
-                return min;
+                return minIndex;
         }
 } //closing class header
