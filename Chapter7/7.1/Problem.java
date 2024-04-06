@@ -19,15 +19,15 @@ public class Problem
 
 		for (int i = 0; i < userInput.length; i++){
                         if (userInput[i] >= maxScore - 10){
-                                System.out.println("Student " + i + " score is " + userInput[i] + " and grade is A");
+                                System.out.println("Student " + (i + 1) + " score is " + userInput[i] + " and grade is A");
                         } else if (userInput[i] >= maxScore - 20){
-                                System.out.println("Student " + i + " score is " + userInput[i] + " and grade is B");
+                                System.out.println("Student " + (i + 1) + " score is " + userInput[i] + " and grade is B");
                         } else if (userInput[i] >= maxScore - 30){
-                                System.out.println("Student " + i + " score is " + userInput[i] + " and grade is C");
+                                System.out.println("Student " + (i + 1) + " score is " + userInput[i] + " and grade is C");
                         } else if (userInput[i] >= maxScore - 40){
-                                System.out.println("Student " + i + " score is " + userInput[i] + " and grade is D");
+                                System.out.println("Student " + (i + 1) + " score is " + userInput[i] + " and grade is D");
                         } else {
-                                System.out.println("Student " + i + " score is " + userInput[i] + " and grade is F");
+                                System.out.println("Student " + (i + 1) + " score is " + userInput[i] + " and grade is F");
                         }
                 }
          } //closing main method
