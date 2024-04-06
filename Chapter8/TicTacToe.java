@@ -22,7 +22,7 @@ public class TicTacToe
                                 for (int j = 0; j < board[i].length; j++){
                                         System.out.print(board[i][j] + " ");
                                 }
-                                System.out.println();
+                                // System.out.println();
                         }
                 }
 } //closing class header
