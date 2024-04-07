@@ -21,7 +21,7 @@ public class Problem
                 for (int i = 0; i < arr.length; i++){
                         sum += Math.pow(arr[i] - mean(arr), 2);
                 }
-                standardDeviation = Math.sqrt(sum / arr.length - 1);
+                standardDeviation = Math.sqrt(sum / arr.length);
                 return standardDeviation;
         }
 
