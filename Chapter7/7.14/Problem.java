@@ -16,11 +16,11 @@ public class Problem
                         userList[i] = input.nextInt();
                 }
 
-                System.out.println(gcd(userList));
+                System.out.println(gcdHelper(5, 15));
 
          } //closing main method
 
-         public static int gcd(int[] numbers) {
+        public static int gcd(int[] numbers) {
                 int result = numbers[0];
                 for (int i = 1; i < numbers.length; i++) {
                     result = gcdHelper(result, numbers[i]);
@@ -29,20 +29,13 @@ public class Problem
             }
         
             public static int gcdHelper(int a, int b) {
-                while (b != 0) {
-                    int temp = b;
-                    b = a % b;
-                    a = temp;
+                int max = Math.max(a, b);
+                int gcd = 1;
+                for (int i = 1; i <= max; i++) {
+                    if (a % i == 0 && b % i == 0) {
+                        gcd = i;
+                    }
                 }
-                return a;
+                return gcd;
             }
-
-        public static int lcm(int[] numbers){
-                int product = 1;
-                for (int i = 0; i < numbers.length; i++){
-                        product *= numbers[i];                
-                }
-                int result = product / gcd(numbers);
-                return result;
-        }
 } //closing class header

@@ -4,6 +4,8 @@ public class Test {
     public static void main(String[] args) {
         int points = 50;
         runTest(points);
+
+        System.out.println(gcd(5, 15));
     }
 
     public static int[] randNumbers(int n) {
@@ -32,7 +34,6 @@ public class Test {
         return avg;
     }
 
-    
     public static void runTest(int pointsInt) {
         Scanner input = new Scanner(System.in);
         int point = pointsInt;

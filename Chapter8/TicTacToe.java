@@ -4,7 +4,12 @@ public class TicTacToe
 {  
         public static void main(String args[ ]) 
         {
-                
+                char[][] board = new char[3][3];
+                char p1 = 'X';
+                char p2 = 'O';
+                boolean turn = true;
+                boolean[] winner = {false, false};
+                int count = 0;
 		
 		
          } //closing main method
