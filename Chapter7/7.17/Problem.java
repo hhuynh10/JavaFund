@@ -17,6 +17,10 @@ public class Problem {
             names[i] = input.next();
             System.out.print("Enter score: ");
             scores[i] = input.nextInt();
+            while (scores[i] < 0 || scores[i] > 100) {
+                System.out.print("Invalid score! Enter score between 0 and 100: ");
+                scores[i] = input.nextInt();
+            }
         }
 
         System.out.println("Names and Scores:");
