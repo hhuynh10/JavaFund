@@ -38,9 +38,54 @@ public class Test {
         String avgIntsString = randNumberString(avgInts);
         System.out.print("What is the average for this set of numbers: " + avgIntsString + "\nYour answer: ");
         double userInput = input.nextDouble();
-        if (userInput == average(avgInts)) {
-            points++;
-        }
+        if (userInput != average(avgInts)) {
+            while (userAttempts > 0 && userAnswer != avg) {
+                printMessages(congratsMessages);
+                System.out.println("Number of attempts remaining: " + userAttempts);
+                System.out.print("Your answer: ");
+                userAnswer = input.nextFloat();
+                if (userAnswer == avg) {
+                  printMessages(congratsMessages);
+                  userPoints += EASY;
+                  System.out.println("Your current points: " + userPoints);
+
+                  // Secret question
+                  if (Math.random() <= 0.5) {
+                    System.out.println(secretQuestion);
+                    System.out.print("Your answer: ");
+                    userAns = input.next().toLowerCase();
+                    if (userAns.equals("hayden")) {
+                        printMessages(congratsMessages);
+                        userPoints += secretQuestionPoint;
+                        System.out.println("Your current points: " + userPoints);
+                    }
+                  }
+
+                }
+                userAttempts--;
+            }
+            if(userAttempts == 0 && userAnswer != avg){
+              System.out.println("Your answer is incorrect. The answer is: " + avg);
+              userPoints -= EASY;
+              System.out.println("Your current points: " + userPoints);
+            }
+          } else {
+              printMessages(congratsMessages);
+              userPoints += EASY;
+              System.out.println("Your current points: " + userPoints);
+
+              // Secret question
+              if (Math.random() <= 0.5) {
+                System.out.println(secretQuestion);
+                System.out.print("Your answer: ");
+                userAns = input.next().toLowerCase();
+                if (userAns.equals("hayden")) {
+                    printMessages(congratsMessages);
+                    userPoints += secretQuestionPoint;
+                    System.out.println("Your current points: " + userPoints);
+                }
+              }
+            }
         System.out.println("Correct average: " + average(avgInts));
         System.out.println("Points: " + points);
     }
