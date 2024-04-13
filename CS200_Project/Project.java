@@ -4,7 +4,7 @@ public class Project {
     public static void main(String args[]) {
         Scanner input = new Scanner(System.in);
 
-        final int EASY = 10;
+        final int EASY = 50;
         final int MEDIUM = 15;
         final int HARD = 20;
 
@@ -52,17 +52,7 @@ public class Project {
         };
 
         printMessages(welcome);
-
-        System.out.print("Would you like to go over the game rules?\n" + "(Y)es or (N)o? ");
-        userAns = input.nextLine().toLowerCase();
-
-        while (userAns.isEmpty() || (userAns.charAt(0) != 'y' && userAns.charAt(0) != 'n')) {
-            System.out.print("Would you like to go over the game rules?\n" + "(Y)es or (N)o? ");
-            userAns = input.nextLine().toLowerCase();
-        }
-        if (userAns.charAt(0) == 'y') {
-            printMessages(gameRules);
-        }
+        printGameRules(gameRules);
 
         do {
             userPoints = 50;
@@ -71,6 +61,12 @@ public class Project {
                 randomQuestions = (int)(Math.random() * 2);
                 System.out.print("Would you like to choose easy, medium or hard question?\n" + "(E)asy, (M)edium, or (H)ard? ");
                 userAns = input.nextLine().toLowerCase();
+
+                while (userAns.charAt(0) != 'e' && userAns.charAt(0) != 'm' && userAns.charAt(0) != 'h') {
+                    System.out.println("Invalid input!!!");
+                    System.out.print("Would you like to choose easy, medium or hard question?\n" + "(E)asy, (M)edium, or (H)ard? ");
+                    userAns = input.nextLine().toLowerCase();
+                }
 
                 if (userAns.length() > 0 && userAns.charAt(0) == 'e') {
                     switch(randomQuestions){
@@ -82,12 +78,25 @@ public class Project {
                         break;
                     }
                 } else if (userAns.length() > 0 && userAns.charAt(0) == 'm') {
-                    System.out.println("Incoming...");
+                    switch(randomQuestions){
+                        case 0:
+                        userPoints = gcdQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, EASY);
+                        break;
+                        // case 1:
+                        // userPoints = averageQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, EASY);
+                        // break;
+                    }
                 } else if (userAns.length() > 0 && userAns.charAt(0) == 'h') {
                     System.out.println("Incoming...");
                 }
             } while (0 < userPoints && userPoints < 150);
             
+            if (userPoints >= 150){
+                System.out.println("CONGRATULATIONS!!! YOU'VE WON!!!");
+            } else if(userPoints <= 0){
+                System.out.println("YOU'VE LOST!!!");
+            }
+
             userPoints = 50;
             userAttempts = 2;
             System.out.print("Do you want to (R)estart or press any key to exit? ");
@@ -100,7 +109,21 @@ public class Project {
         System.out.println("Thanks for playing!");
     }
 
-    // General methods
+    // GENERAL METHODS
+    public static void printGameRules(String gameRules){
+        Scanner input = new Scanner(System.in);
+        System.out.print("Would you like to go over the game rules?\n" + "(Y)es or (N)o? ");
+        String userInput = input.nextLine().toLowerCase();
+
+        while (userInput.charAt(0) != 'y' && userInput.charAt(0) != 'n') {
+            System.out.print("Would you like to go over the game rules?\n" + "(Y)es or (N)o? ");
+            userInput = input.nextLine().toLowerCase();
+        }
+        if (userInput.charAt(0) == 'y') {
+            printMessages(gameRules);
+        }
+    }
+
     public static void printMessages(String message) {
         System.out.println(message);
     }
@@ -131,7 +154,7 @@ public class Project {
     }
 
     public static int secretQuestion(int points, String[] congratsMessages) {
-        if (Math.random() <= 0.1) {
+        if (Math.random() <= 0.1 && points < 150) {
             Scanner input = new Scanner(System.in);
             String userInput;
             System.out.println("YOU GOT A SECRET QUESTION!!!\n(if answer correctly +50 points, otherwise -50 points)");
@@ -155,7 +178,8 @@ public class Project {
         return points;
     }
     
-    // Mathematical methods
+    // MATHEMATICAL METHODS
+    // EASY METHODS
     public static int factorial(int number) {
         int total = 1;
         for (int i = number; i > 0; i--) {
@@ -232,6 +256,53 @@ public class Project {
             }
             if (userAttempts == 0 && userInput != factorial(ints)) {
                 System.out.println("Your answer is incorrect. The answer is: " + factorial(ints));
+                points -= difficulty;
+                System.out.println("Your current points: " + points);
+            }
+        } else {
+            printMessages(congratsMessages);
+            points += difficulty;
+            System.out.println("Your current points: " + points);
+            // Secret question
+            points = secretQuestion(points, congratsMessages);
+
+        }
+        return points;
+    }
+
+    // MEDIUM METHODS
+    public static int gcd(int num1, int num2) {
+        while (num2 != 0) {
+            int temp = num2;
+            num2 = num1 % num2;
+            num1 = temp;
+        }
+        return num1;
+    }
+
+    public static int gcdQuestion(int points, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
+        Scanner input = new Scanner(System.in);
+        int num1 = randNumbers(1000);
+        int num2 = randNumbers(1000);
+        System.out.print("What is the factorial of these number: " + num1 + " and " + num2 + "\nYour answer: ");
+        double userInput = input.nextDouble();
+        if (userInput != gcd(num1, num2)) {
+            while (userAttempts > 0 && userInput != gcd(num1, num2)) {
+                printMessages(motivationMessages);
+                System.out.println("Number of attempts remaining: " + userAttempts);
+                System.out.print("Your answer: ");
+                userInput = input.nextFloat();
+                if (userInput == gcd(num1, num2)) {
+                    printMessages(congratsMessages);
+                    points += difficulty;
+                    System.out.println("Your current points: " + points);
+                    // Secret question
+                    points = secretQuestion(points, congratsMessages);
+                }
+                userAttempts--;
+            }
+            if (userAttempts == 0 && userInput != gcd(num1, num2)) {
+                System.out.println("Your answer is incorrect. The answer is: " + gcd(num1, num2));
                 points -= difficulty;
                 System.out.println("Your current points: " + points);
             }
