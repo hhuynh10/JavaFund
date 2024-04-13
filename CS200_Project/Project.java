@@ -11,7 +11,6 @@ public class Project {
         int userPoints;
         int userAttempts;
         String userAns;
-        int hints;
         int randomQuestions;
 
         String welcome = "Welcome to Java Beans' Project";
@@ -91,7 +90,6 @@ public class Project {
             
             userPoints = 50;
             userAttempts = 2;
-            hints = 2;
             System.out.print("Do you want to (R)estart or press any key to exit? ");
             userAns = input.nextLine().toLowerCase();
             if (userAns.length() > 0 && userAns.charAt(0) == 'r') {
@@ -111,12 +109,17 @@ public class Project {
         System.out.println(messageList[(int) (Math.random() * messageList.length)]);
     }
 
-    public static int[] randNumbers(int n) {
-        int[] randNumberList = new int[n];
+    public static int[] randNumbers(int numbers, int limit) {
+        int[] randNumberList = new int[numbers];
         for (int i = 0; i < randNumberList.length; i++) {
-            randNumberList[i] = (int) (Math.random() * 10);
+            randNumberList[i] = (int) (Math.random() * limit);
         }
         return randNumberList;
+    }
+
+    public static int randNumbers(int limit) {
+        int randInt = (int)(Math.random() * limit);
+        return randInt;
     }
 
     public static String randNumberString(int[] arr) {
@@ -128,7 +131,7 @@ public class Project {
     }
 
     public static int secretQuestion(int points, String[] congratsMessages) {
-        if (Math.random() <= 0.5) {
+        if (Math.random() <= 0.1) {
             Scanner input = new Scanner(System.in);
             String userInput;
             System.out.println("YOU GOT A SECRET QUESTION!!!\n(if answer correctly +50 points, otherwise -50 points)");
@@ -153,9 +156,9 @@ public class Project {
     }
     
     // Mathematical methods
-    public static int factorial(int[] arr) {
+    public static int factorial(int number) {
         int total = 1;
-        for (int i = arr[0]; i > 0; i--) {
+        for (int i = number; i > 0; i--) {
             total *= i;
         }
         return total;
@@ -173,7 +176,7 @@ public class Project {
 
     public static int averageQuestion(int points, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
         Scanner input = new Scanner(System.in);
-        int[] avgInts = randNumbers(5);
+        int[] avgInts = randNumbers(5,100);
         String avgIntsString = randNumberString(avgInts);
         System.out.print("What is the average for this set of numbers: " + avgIntsString + "\nYour answer: ");
         double userInput = input.nextDouble();
@@ -209,9 +212,8 @@ public class Project {
 
     public static int factorialQuestion(int points, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
         Scanner input = new Scanner(System.in);
-        int[] ints = randNumbers(1);
-        String intsString = randNumberString(ints);
-        System.out.print("What is the factorial of this number: " + intsString + "\nYour answer: ");
+        int ints = randNumbers(10);
+        System.out.print("What is the factorial of this number: " + ints + "\nYour answer: ");
         double userInput = input.nextDouble();
         if (userInput != factorial(ints)) {
             while (userAttempts > 0 && userInput != factorial(ints)) {
@@ -219,7 +221,7 @@ public class Project {
                 System.out.println("Number of attempts remaining: " + userAttempts);
                 System.out.print("Your answer: ");
                 userInput = input.nextFloat();
-                if (userInput == average(ints)) {
+                if (userInput == factorial(ints)) {
                     printMessages(congratsMessages);
                     points += difficulty;
                     System.out.println("Your current points: " + points);
@@ -239,7 +241,7 @@ public class Project {
             System.out.println("Your current points: " + points);
             // Secret question
             points = secretQuestion(points, congratsMessages);
-            
+
         }
         return points;
     }
