@@ -131,7 +131,7 @@ public class Project {
         if (Math.random() <= 0.5) {
             Scanner input = new Scanner(System.in);
             String userInput;
-            System.out.println("YOU GOT A SECRET QUESTION!!!\n(if answer correct +50 points otherwise -50 points)");
+            System.out.println("YOU GOT A SECRET QUESTION!!!\n(if answer correctly +50 points, otherwise -50 points)");
             System.out.print("Would you like to risk? (Y)es or (N)o? ");
             userInput = input.next().toLowerCase();
             int randNum = (int)(Math.random() * 10);
@@ -239,6 +239,7 @@ public class Project {
             System.out.println("Your current points: " + points);
             // Secret question
             points = secretQuestion(points, congratsMessages);
+            
         }
         return points;
     }
