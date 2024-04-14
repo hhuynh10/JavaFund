@@ -15,6 +15,7 @@ public class Problem
                 System.out.println("The mean is: " + mean(arrInput));
                 System.out.println("The standard deviation is: " + deviation(arrInput));
          } //closing main method
+        
         public static double deviation(double[] arr){
                 double sum = 0.0;
                 double standardDeviation;
