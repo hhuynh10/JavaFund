@@ -309,7 +309,7 @@ public class Project {
     }
 
     public static int isPrimeQuestion(int points, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
-        userAttempts = 1;
+        userAttempts = 0;
         Scanner input = new Scanner(System.in);
         int num = randNumbers(500);
         System.out.print("Is this number " + num + " a prime number? (True for Yes and False for No)" + "\nYour answer: ");
