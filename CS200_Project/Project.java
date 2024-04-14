@@ -204,13 +204,14 @@ public class Project {
         String avgIntsString = randNumberString(avgInts);
         System.out.print("What is the average for this set of numbers: " + avgIntsString + "\nYour answer: ");
         double userInput = input.nextDouble();
-        if (userInput != average(avgInts)) {
-            while (userAttempts > 0 && userInput != average(avgInts)) {
+        double result = average(avgInts);
+        if (userInput != result) {
+            while (userAttempts > 0 && userInput != result) {
                 printMessages(motivationMessages);
                 System.out.println("Number of attempts remaining: " + userAttempts);
                 System.out.print("Your answer: ");
                 userInput = input.nextDouble();
-                if (userInput == average(avgInts)) {
+                if (userInput == result) {
                     printMessages(congratsMessages);
                     points += difficulty;
                     System.out.println("Your current points: " + points);
@@ -219,8 +220,8 @@ public class Project {
                 }
                 userAttempts--;
             }
-            if (userAttempts == 0 && userInput != average(avgInts)) {
-                System.out.println("Your answer is incorrect. The answer is: " + average(avgInts));
+            if (userAttempts == 0 && userInput != result) {
+                System.out.println("Your answer is incorrect. The answer is: " + result);
                 points -= difficulty;
                 System.out.println("Your current points: " + points);
             }
@@ -239,13 +240,14 @@ public class Project {
         int ints = randNumbers(10);
         System.out.print("What is the factorial of this number: " + ints + "\nYour answer: ");
         double userInput = input.nextDouble();
-        if (userInput != factorial(ints)) {
-            while (userAttempts > 0 && userInput != factorial(ints)) {
+        int result = factorial(ints);
+        if (userInput != result) {
+            while (userAttempts > 0 && userInput != result) {
                 printMessages(motivationMessages);
                 System.out.println("Number of attempts remaining: " + userAttempts);
                 System.out.print("Your answer: ");
                 userInput = input.nextDouble();
-                if (userInput == factorial(ints)) {
+                if (userInput == result) {
                     printMessages(congratsMessages);
                     points += difficulty;
                     System.out.println("Your current points: " + points);
@@ -254,8 +256,8 @@ public class Project {
                 }
                 userAttempts--;
             }
-            if (userAttempts == 0 && userInput != factorial(ints)) {
-                System.out.println("Your answer is incorrect. The answer is: " + factorial(ints));
+            if (userAttempts == 0 && userInput != result) {
+                System.out.println("Your answer is incorrect. The answer is: " + result);
                 points -= difficulty;
                 System.out.println("Your current points: " + points);
             }
@@ -265,7 +267,6 @@ public class Project {
             System.out.println("Your current points: " + points);
             // Secret question
             points = secretQuestion(points, congratsMessages);
-
         }
         return points;
     }
@@ -291,13 +292,14 @@ public class Project {
         int num2 = randNumbers(500);
         System.out.print("What is the greatest common divisor of these number: " + num1 + " and " + num2 + "\nYour answer: ");
         double userInput = input.nextDouble();
-        if (userInput != gcd(num1, num2)) {
-            while (userAttempts > 0 && userInput != gcd(num1, num2)) {
+        int result = gcd(num1, num2);
+        if (userInput != result) {
+            while (userAttempts > 0 && userInput != result) {
                 printMessages(motivationMessages);
                 System.out.println("Number of attempts remaining: " + userAttempts);
                 System.out.print("Your answer: ");
                 userInput = input.nextDouble();
-                if (userInput == gcd(num1, num2)) {
+                if (userInput == result) {
                     printMessages(congratsMessages);
                     points += difficulty;
                     System.out.println("Your current points: " + points);
@@ -306,8 +308,8 @@ public class Project {
                 }
                 userAttempts--;
             }
-            if (userAttempts == 0 && userInput != gcd(num1, num2)) {
-                System.out.println("Your answer is incorrect. The answer is: " + gcd(num1, num2));
+            if (userAttempts == 0 && userInput != result) {
+                System.out.println("Your answer is incorrect. The answer is: " + result);
                 points -= difficulty;
                 System.out.println("Your current points: " + points);
             }
@@ -317,7 +319,6 @@ public class Project {
             System.out.println("Your current points: " + points);
             // Secret question
             points = secretQuestion(points, congratsMessages);
-
         }
         return points;
     }
@@ -328,13 +329,14 @@ public class Project {
         int num2 = randNumbers(250);
         System.out.print("What is the least common multiple of these number: " + num1 + " and " + num2 + "\nYour answer: ");
         double userInput = input.nextDouble();
-        if (userInput != lcm(num1, num2)) {
-            while (userAttempts > 0 && userInput != lcm(num1, num2)) {
+        int result = lcm(num1, num2);
+        if (userInput != result) {
+            while (userAttempts > 0 && userInput != result) {
                 printMessages(motivationMessages);
                 System.out.println("Number of attempts remaining: " + userAttempts);
                 System.out.print("Your answer: ");
                 userInput = input.nextDouble();
-                if (userInput == lcm(num1, num2)) {
+                if (userInput == result) {
                     printMessages(congratsMessages);
                     points += difficulty;
                     System.out.println("Your current points: " + points);
@@ -343,8 +345,8 @@ public class Project {
                 }
                 userAttempts--;
             }
-            if (userAttempts == 0 && userInput != lcm(num1, num2)) {
-                System.out.println("Your answer is incorrect. The answer is: " + lcm(num1, num2));
+            if (userAttempts == 0 && userInput != result) {
+                System.out.println("Your answer is incorrect. The answer is: " + result);
                 points -= difficulty;
                 System.out.println("Your current points: " + points);
             }
@@ -354,7 +356,6 @@ public class Project {
             System.out.println("Your current points: " + points);
             // Secret question
             points = secretQuestion(points, congratsMessages);
-
         }
         return points;
     }
