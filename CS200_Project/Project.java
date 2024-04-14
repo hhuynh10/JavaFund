@@ -106,8 +106,12 @@ public class Project {
 
             userPoints = 50;
             userAttempts = 2;
-            System.out.print("Do you want to (R)estart or press any key to exit? ");
+            System.out.print("Do you want to (R)estart or (E)xit? ");
             userAns = input.nextLine().toLowerCase();
+            while (userAns.charAt(0) != 'r' && userAns.charAt(0) != 'e') {
+                System.out.print("Do you want to (R)estart or (E)xit the game? ");
+                userAns = input.nextLine().toLowerCase();
+            }
             if (userAns.length() > 0 && userAns.charAt(0) == 'r') {
                 System.out.println("Game restarting now!");
             }
@@ -121,7 +125,6 @@ public class Project {
         Scanner input = new Scanner(System.in);
         System.out.print("Would you like to go over the game rules?\n" + "(Y)es or (N)o? ");
         String userInput = input.nextLine().toLowerCase();
-
         while (userInput.charAt(0) != 'y' && userInput.charAt(0) != 'n') {
             System.out.print("Would you like to go over the game rules?\n" + "(Y)es or (N)o? ");
             userInput = input.nextLine().toLowerCase();
@@ -165,7 +168,11 @@ public class Project {
             Scanner input = new Scanner(System.in);
             System.out.println("YOU GOT A SECRET QUESTION!!!\n(if answer correctly +50 points, otherwise -50 points)");
             System.out.print("Would you like to risk? (Y)es or (N)o? ");
-            String userInput = input.next().toLowerCase();
+            String userInput = input.nextLine().toLowerCase();
+            while (userInput.charAt(0) != 'y' && userInput.charAt(0) != 'n') {
+                System.out.print("Would you like to risk? (Y)es or (N)o? ");
+                userInput = input.nextLine().toLowerCase();
+            }
             if (userInput.equals("y")) {
                 int randNum = (int)(Math.random() * 10);
                 System.out.print("Guess a random number from 0 - 9: ");
@@ -213,7 +220,7 @@ public class Project {
         }
         return points;
     }
-    
+
 
     // MATHEMATICAL METHODS
     // EASY QUESTION METHODS
