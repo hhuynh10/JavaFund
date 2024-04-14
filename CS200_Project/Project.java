@@ -80,11 +80,11 @@ public class Project {
                 } else if (userAns.length() > 0 && userAns.charAt(0) == 'm') {
                     switch(randomQuestions){
                         case 0:
-                        userPoints = gcdQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, EASY);
+                        userPoints = gcdQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, MEDIUM);
                         break;
-                        // case 1:
-                        // userPoints = averageQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, EASY);
-                        // break;
+                        case 1:
+                        userPoints = lcmQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, MEDIUM);
+                        break;
                     }
                 } else if (userAns.length() > 0 && userAns.charAt(0) == 'h') {
                     System.out.println("Incoming...");
@@ -132,16 +132,16 @@ public class Project {
         System.out.println(messageList[(int) (Math.random() * messageList.length)]);
     }
 
-    public static int[] randNumbers(int numbers, int limit) {
+    public static int[] randNumbers(int numbers, int range) {
         int[] randNumberList = new int[numbers];
         for (int i = 0; i < randNumberList.length; i++) {
-            randNumberList[i] = (int) (Math.random() * limit);
+            randNumberList[i] = (int) (Math.random() * range);
         }
         return randNumberList;
     }
 
-    public static int randNumbers(int limit) {
-        int randInt = (int)(Math.random() * limit);
+    public static int randNumbers(int range) {
+        int randInt = (int)(Math.random() * range);
         return randInt;
     }
 
@@ -209,7 +209,7 @@ public class Project {
                 printMessages(motivationMessages);
                 System.out.println("Number of attempts remaining: " + userAttempts);
                 System.out.print("Your answer: ");
-                userInput = input.nextFloat();
+                userInput = input.nextDouble();
                 if (userInput == average(avgInts)) {
                     printMessages(congratsMessages);
                     points += difficulty;
@@ -244,7 +244,7 @@ public class Project {
                 printMessages(motivationMessages);
                 System.out.println("Number of attempts remaining: " + userAttempts);
                 System.out.print("Your answer: ");
-                userInput = input.nextFloat();
+                userInput = input.nextDouble();
                 if (userInput == factorial(ints)) {
                     printMessages(congratsMessages);
                     points += difficulty;
@@ -280,18 +280,23 @@ public class Project {
         return num1;
     }
 
+    public static int lcm(int num1, int num2) {
+        int lcm = (num1 * num2) / gcd(num1, num2);
+        return Math.abs(lcm);
+    }
+
     public static int gcdQuestion(int points, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
         Scanner input = new Scanner(System.in);
         int num1 = randNumbers(1000);
-        int num2 = randNumbers(1000);
-        System.out.print("What is the factorial of these number: " + num1 + " and " + num2 + "\nYour answer: ");
+        int num2 = randNumbers(500);
+        System.out.print("What is the greatest common divisor of these number: " + num1 + " and " + num2 + "\nYour answer: ");
         double userInput = input.nextDouble();
         if (userInput != gcd(num1, num2)) {
             while (userAttempts > 0 && userInput != gcd(num1, num2)) {
                 printMessages(motivationMessages);
                 System.out.println("Number of attempts remaining: " + userAttempts);
                 System.out.print("Your answer: ");
-                userInput = input.nextFloat();
+                userInput = input.nextDouble();
                 if (userInput == gcd(num1, num2)) {
                     printMessages(congratsMessages);
                     points += difficulty;
@@ -303,6 +308,43 @@ public class Project {
             }
             if (userAttempts == 0 && userInput != gcd(num1, num2)) {
                 System.out.println("Your answer is incorrect. The answer is: " + gcd(num1, num2));
+                points -= difficulty;
+                System.out.println("Your current points: " + points);
+            }
+        } else {
+            printMessages(congratsMessages);
+            points += difficulty;
+            System.out.println("Your current points: " + points);
+            // Secret question
+            points = secretQuestion(points, congratsMessages);
+
+        }
+        return points;
+    }
+
+    public static int lcmQuestion(int points, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
+        Scanner input = new Scanner(System.in);
+        int num1 = randNumbers(500);
+        int num2 = randNumbers(250);
+        System.out.print("What is the least common multiple of these number: " + num1 + " and " + num2 + "\nYour answer: ");
+        double userInput = input.nextDouble();
+        if (userInput != lcm(num1, num2)) {
+            while (userAttempts > 0 && userInput != lcm(num1, num2)) {
+                printMessages(motivationMessages);
+                System.out.println("Number of attempts remaining: " + userAttempts);
+                System.out.print("Your answer: ");
+                userInput = input.nextDouble();
+                if (userInput == lcm(num1, num2)) {
+                    printMessages(congratsMessages);
+                    points += difficulty;
+                    System.out.println("Your current points: " + points);
+                    // Secret question
+                    points = secretQuestion(points, congratsMessages);
+                }
+                userAttempts--;
+            }
+            if (userAttempts == 0 && userInput != lcm(num1, num2)) {
+                System.out.println("Your answer is incorrect. The answer is: " + lcm(num1, num2));
                 points -= difficulty;
                 System.out.println("Your current points: " + points);
             }
