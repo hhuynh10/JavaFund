@@ -91,16 +91,16 @@ public class Project {
                         case 0:
                         userPoints = baseConversionQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, HARD);
                         break;
-                        // case 1:
-                        // userPoints = lcmQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, MEDIUM);
-                        // break;
+                        case 1:
+                        userPoints = romanConversionQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, HARD);
+                        break;
                     }
                 }
             } while (0 < userPoints && userPoints < 150);
             
             if (userPoints >= 150){
                 System.out.println("CONGRATULATIONS!!! YOU'VE WON!!!");
-            } else if(userPoints <= 0){
+            } else if (userPoints <= 0){
                 System.out.println("YOU'VE LOST!!!");
             }
 
@@ -113,7 +113,7 @@ public class Project {
             }
         } while (userAns.length() > 0 && userAns.charAt(0) == 'r');
 
-        System.out.println("Thanks for playing!");
+        System.out.println("Thank you for playing!");
     }
 
     // GENERAL METHODS
@@ -205,13 +205,12 @@ public class Project {
         return avg;
     }
 
-    public static int averageQuestion(int points, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
+    public static int factorialQuestion(int points, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
         Scanner input = new Scanner(System.in);
-        int[] avgInts = randNumbers(5,100);
-        String avgIntsString = randNumberString(avgInts);
-        System.out.print("What is the average for this set of numbers: " + avgIntsString + "\nYour answer: ");
+        int ints = randNumbers(10);
+        System.out.print("What is the factorial of this number: " + ints + "\nYour answer: ");
         double userInput = input.nextDouble();
-        double result = average(avgInts);
+        int result = factorial(ints);
         if (userInput != result) {
             while (userAttempts > 0 && userInput != result) {
                 printMessages(motivationMessages);
@@ -241,13 +240,14 @@ public class Project {
         }
         return points;
     }
-
-    public static int factorialQuestion(int points, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
+    
+    public static int averageQuestion(int points, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
         Scanner input = new Scanner(System.in);
-        int ints = randNumbers(10);
-        System.out.print("What is the factorial of this number: " + ints + "\nYour answer: ");
+        int[] avgInts = randNumbers(5,100);
+        String avgIntsString = randNumberString(avgInts);
+        System.out.print("What is the average for this set of numbers: " + avgIntsString + "\nYour answer: ");
         double userInput = input.nextDouble();
-        int result = factorial(ints);
+        double result = average(avgInts);
         if (userInput != result) {
             while (userAttempts > 0 && userInput != result) {
                 printMessages(motivationMessages);
@@ -398,6 +398,35 @@ public class Project {
         return result;
     }
 
+    public static String romanConversion(int num) {
+        String[][] symbolList = {
+            {"M", "1000"},
+            {"CM", "900"},
+            {"D", "500"},
+            {"CD", "400"},
+            {"C", "100"},
+            {"XC", "90"},
+            {"L", "50"},
+            {"XL", "40"},
+            {"X", "10"},
+            {"IX", "9"},
+            {"V", "5"},
+            {"IV", "4"},
+            {"I", "1"}
+        };
+
+        String result = "";
+        for (String[] pair : symbolList) {
+            String symbol = pair[0];
+            int value = Integer.parseInt(pair[1]);
+            while (num >= value) {
+                result += symbol;
+                num -= value;
+            }
+        }
+        return result;
+    }
+
     public static int baseConversionQuestion(int points, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
         Scanner input = new Scanner(System.in);
         int num = randNumbers(1000);
@@ -406,6 +435,42 @@ public class Project {
         System.out.print("Convert this number " + num + " into base " + base + "\nYour answer: ");
         String userInput = input.nextLine().toUpperCase();
         String result = baseConversion(num, base);
+        if (!userInput.equals(result)) {
+            while (userAttempts > 0 && !userInput.equals(result)) {
+                printMessages(motivationMessages);
+                System.out.println("Number of attempts remaining: " + userAttempts);
+                System.out.print("Your answer: ");
+                userInput = input.nextLine();
+                if (userInput.equals(result)) {
+                    printMessages(congratsMessages);
+                    points += difficulty;
+                    System.out.println("Your current points: " + points);
+                    // Secret question
+                    points = secretQuestion(points, congratsMessages);
+                }
+                userAttempts--;
+            }
+            if (userAttempts == 0 && !userInput.equals(result)) {
+                System.out.println("Your answer is incorrect. The answer is: " + result);
+                points -= difficulty;
+                System.out.println("Your current points: " + points);
+            }
+        } else {
+            printMessages(congratsMessages);
+            points += difficulty;
+            System.out.println("Your current points: " + points);
+            // Secret question
+            points = secretQuestion(points, congratsMessages);
+        }
+        return points;
+    }
+
+    public static int romanConversionQuestion(int points, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
+        Scanner input = new Scanner(System.in);
+        int num = randNumbers(5000);
+        System.out.print("Convert this number " + num + " into Roman Numeral " + "\nYour answer: ");
+        String userInput = input.nextLine().toUpperCase();
+        String result = romanConversion(num);
         if (!userInput.equals(result)) {
             while (userAttempts > 0 && !userInput.equals(result)) {
                 printMessages(motivationMessages);
