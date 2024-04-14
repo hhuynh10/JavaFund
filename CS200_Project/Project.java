@@ -4,7 +4,7 @@ public class Project {
     public static void main(String args[]) {
         Scanner input = new Scanner(System.in);
 
-        final int EASY = 50;
+        final int EASY = 10;
         final int MEDIUM = 15;
         final int HARD = 20;
 
@@ -163,15 +163,14 @@ public class Project {
     public static int secretQuestion(int points, String[] congratsMessages) {
         if (Math.random() <= 0.1 && points < 150) {
             Scanner input = new Scanner(System.in);
-            String userInput;
             System.out.println("YOU GOT A SECRET QUESTION!!!\n(if answer correctly +50 points, otherwise -50 points)");
             System.out.print("Would you like to risk? (Y)es or (N)o? ");
-            userInput = input.next().toLowerCase();
-            int randNum = (int)(Math.random() * 10);
-            if (userInput.charAt(0) == 'y') {
+            String userInput = input.next().toLowerCase();
+            if (userInput.equals("y")) {
+                int randNum = (int)(Math.random() * 10);
                 System.out.print("Guess a random number from 0 - 9: ");
-                userInput = input.next();
-                if (Integer.parseInt(userInput) == randNum){
+                userInput = input.nextLine();
+                if (userInput.equals(Integer.toString(randNum))) {
                     printMessages(congratsMessages);
                     points += 50;
                     System.out.println("Your current points: " + points);
@@ -185,112 +184,91 @@ public class Project {
         return points;
     }
     
+    public static int compareResult(int points, String userInput, String result, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
+        Scanner input = new Scanner(System.in);
+        if (!userInput.equals(result)) {
+            while (userAttempts > 0 && !userInput.equals(result)) {
+                printMessages(motivationMessages);
+                System.out.println("Number of attempts remaining: " + userAttempts);
+                System.out.print("Your answer: ");
+                userInput = input.nextLine();
+                if (userInput.equals(result)) {
+                    printMessages(congratsMessages);
+                    points += difficulty;
+                    System.out.println("Your current points: " + points);
+                    points = secretQuestion(points, congratsMessages);
+                }
+                userAttempts--;
+            }
+            if (userAttempts == 0 && !userInput.equals(result)) {
+                System.out.println("Your answer is incorrect. The answer is: " + result);
+                points -= difficulty;
+                System.out.println("Your current points: " + points);
+            }
+        } else {
+            printMessages(congratsMessages);
+            points += difficulty;
+            System.out.println("Your current points: " + points);
+            points = secretQuestion(points, congratsMessages);
+        }
+        return points;
+    }
+    
+
     // MATHEMATICAL METHODS
     // EASY QUESTION METHODS
-    public static int factorial(int number) {
+    public static String factorial(int number) {
         int total = 1;
         for (int i = number; i > 0; i--) {
             total *= i;
         }
-        return total;
-    }
+        return Integer.toString(total);
+    }    
 
-    public static double average(int[] arr) {
+    public static String average(int[] arr) {
         double avg;
         int sum = 0;
         for (int i = 0; i < arr.length; i++) {
             sum += arr[i];
         }
         avg = (double) sum / arr.length;
-        return avg;
-    }
+        return Double.toString(avg);
+    }    
 
     public static int factorialQuestion(int points, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
         Scanner input = new Scanner(System.in);
         int ints = randNumbers(10);
         System.out.print("What is the factorial of this number: " + ints + "\nYour answer: ");
-        double userInput = input.nextDouble();
-        int result = factorial(ints);
-        if (userInput != result) {
-            while (userAttempts > 0 && userInput != result) {
-                printMessages(motivationMessages);
-                System.out.println("Number of attempts remaining: " + userAttempts);
-                System.out.print("Your answer: ");
-                userInput = input.nextDouble();
-                if (userInput == result) {
-                    printMessages(congratsMessages);
-                    points += difficulty;
-                    System.out.println("Your current points: " + points);
-                    // Secret question
-                    points = secretQuestion(points, congratsMessages);
-                }
-                userAttempts--;
-            }
-            if (userAttempts == 0 && userInput != result) {
-                System.out.println("Your answer is incorrect. The answer is: " + result);
-                points -= difficulty;
-                System.out.println("Your current points: " + points);
-            }
-        } else {
-            printMessages(congratsMessages);
-            points += difficulty;
-            System.out.println("Your current points: " + points);
-            // Secret question
-            points = secretQuestion(points, congratsMessages);
-        }
+        String userInput = input.nextLine();
+        String result = factorial(ints);
+        points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
         return points;
     }
-    
+
     public static int averageQuestion(int points, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
         Scanner input = new Scanner(System.in);
         int[] avgInts = randNumbers(5,100);
         String avgIntsString = randNumberString(avgInts);
         System.out.print("What is the average for this set of numbers: " + avgIntsString + "\nYour answer: ");
-        double userInput = input.nextDouble();
-        double result = average(avgInts);
-        if (userInput != result) {
-            while (userAttempts > 0 && userInput != result) {
-                printMessages(motivationMessages);
-                System.out.println("Number of attempts remaining: " + userAttempts);
-                System.out.print("Your answer: ");
-                userInput = input.nextDouble();
-                if (userInput == result) {
-                    printMessages(congratsMessages);
-                    points += difficulty;
-                    System.out.println("Your current points: " + points);
-                    // Secret question
-                    points = secretQuestion(points, congratsMessages);
-                }
-                userAttempts--;
-            }
-            if (userAttempts == 0 && userInput != result) {
-                System.out.println("Your answer is incorrect. The answer is: " + result);
-                points -= difficulty;
-                System.out.println("Your current points: " + points);
-            }
-        } else {
-            printMessages(congratsMessages);
-            points += difficulty;
-            System.out.println("Your current points: " + points);
-            // Secret question
-            points = secretQuestion(points, congratsMessages);
-        }
+        String userInput = input.nextLine();
+        String result = average(avgInts);
+        points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
         return points;
     }
 
     // MEDIUM QUESTION METHODS
-    public static int gcd(int num1, int num2) {
+    public static String gcd(int num1, int num2) {
         while (num2 != 0) {
             int temp = num2;
             num2 = num1 % num2;
             num1 = temp;
         }
-        return num1;
+        return Integer.toString(num1);
     }
 
-    public static int lcm(int num1, int num2) {
-        int lcm = (num1 * num2) / gcd(num1, num2);
-        return Math.abs(lcm);
+    public static String lcm(int num1, int num2) {
+        int lcm = (num1 * num2) / Integer.parseInt(gcd(num1, num2));
+        return Integer.toString(Math.abs(lcm));
     }
 
     public static int gcdQuestion(int points, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
@@ -298,35 +276,9 @@ public class Project {
         int num1 = randNumbers(1000);
         int num2 = randNumbers(500);
         System.out.print("What is the greatest common divisor of these number: " + num1 + " and " + num2 + "\nYour answer: ");
-        double userInput = input.nextDouble();
-        int result = gcd(num1, num2);
-        if (userInput != result) {
-            while (userAttempts > 0 && userInput != result) {
-                printMessages(motivationMessages);
-                System.out.println("Number of attempts remaining: " + userAttempts);
-                System.out.print("Your answer: ");
-                userInput = input.nextDouble();
-                if (userInput == result) {
-                    printMessages(congratsMessages);
-                    points += difficulty;
-                    System.out.println("Your current points: " + points);
-                    // Secret question
-                    points = secretQuestion(points, congratsMessages);
-                }
-                userAttempts--;
-            }
-            if (userAttempts == 0 && userInput != result) {
-                System.out.println("Your answer is incorrect. The answer is: " + result);
-                points -= difficulty;
-                System.out.println("Your current points: " + points);
-            }
-        } else {
-            printMessages(congratsMessages);
-            points += difficulty;
-            System.out.println("Your current points: " + points);
-            // Secret question
-            points = secretQuestion(points, congratsMessages);
-        }
+        String userInput = input.nextLine();
+        String result = gcd(num1, num2);
+        points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
         return points;
     }
 
@@ -335,35 +287,9 @@ public class Project {
         int num1 = randNumbers(500);
         int num2 = randNumbers(250);
         System.out.print("What is the least common multiple of these number: " + num1 + " and " + num2 + "\nYour answer: ");
-        double userInput = input.nextDouble();
-        int result = lcm(num1, num2);
-        if (userInput != result) {
-            while (userAttempts > 0 && userInput != result) {
-                printMessages(motivationMessages);
-                System.out.println("Number of attempts remaining: " + userAttempts);
-                System.out.print("Your answer: ");
-                userInput = input.nextDouble();
-                if (userInput == result) {
-                    printMessages(congratsMessages);
-                    points += difficulty;
-                    System.out.println("Your current points: " + points);
-                    // Secret question
-                    points = secretQuestion(points, congratsMessages);
-                }
-                userAttempts--;
-            }
-            if (userAttempts == 0 && userInput != result) {
-                System.out.println("Your answer is incorrect. The answer is: " + result);
-                points -= difficulty;
-                System.out.println("Your current points: " + points);
-            }
-        } else {
-            printMessages(congratsMessages);
-            points += difficulty;
-            System.out.println("Your current points: " + points);
-            // Secret question
-            points = secretQuestion(points, congratsMessages);
-        }
+        String userInput = input.nextLine();
+        String result = lcm(num1, num2);
+        points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
         return points;
     }
 
@@ -435,33 +361,7 @@ public class Project {
         System.out.print("Convert this number " + num + " into base " + base + "\nYour answer: ");
         String userInput = input.nextLine().toUpperCase();
         String result = baseConversion(num, base);
-        if (!userInput.equals(result)) {
-            while (userAttempts > 0 && !userInput.equals(result)) {
-                printMessages(motivationMessages);
-                System.out.println("Number of attempts remaining: " + userAttempts);
-                System.out.print("Your answer: ");
-                userInput = input.nextLine();
-                if (userInput.equals(result)) {
-                    printMessages(congratsMessages);
-                    points += difficulty;
-                    System.out.println("Your current points: " + points);
-                    // Secret question
-                    points = secretQuestion(points, congratsMessages);
-                }
-                userAttempts--;
-            }
-            if (userAttempts == 0 && !userInput.equals(result)) {
-                System.out.println("Your answer is incorrect. The answer is: " + result);
-                points -= difficulty;
-                System.out.println("Your current points: " + points);
-            }
-        } else {
-            printMessages(congratsMessages);
-            points += difficulty;
-            System.out.println("Your current points: " + points);
-            // Secret question
-            points = secretQuestion(points, congratsMessages);
-        }
+        points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
         return points;
     }
 
@@ -471,33 +371,7 @@ public class Project {
         System.out.print("Convert this number " + num + " into Roman Numeral " + "\nYour answer: ");
         String userInput = input.nextLine().toUpperCase();
         String result = romanConversion(num);
-        if (!userInput.equals(result)) {
-            while (userAttempts > 0 && !userInput.equals(result)) {
-                printMessages(motivationMessages);
-                System.out.println("Number of attempts remaining: " + userAttempts);
-                System.out.print("Your answer: ");
-                userInput = input.nextLine();
-                if (userInput.equals(result)) {
-                    printMessages(congratsMessages);
-                    points += difficulty;
-                    System.out.println("Your current points: " + points);
-                    // Secret question
-                    points = secretQuestion(points, congratsMessages);
-                }
-                userAttempts--;
-            }
-            if (userAttempts == 0 && !userInput.equals(result)) {
-                System.out.println("Your answer is incorrect. The answer is: " + result);
-                points -= difficulty;
-                System.out.println("Your current points: " + points);
-            }
-        } else {
-            printMessages(congratsMessages);
-            points += difficulty;
-            System.out.println("Your current points: " + points);
-            // Secret question
-            points = secretQuestion(points, congratsMessages);
-        }
+        points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
         return points;
     }
 }
