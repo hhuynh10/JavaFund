@@ -232,16 +232,6 @@ public class Project {
         return Integer.toString(total);
     }    
 
-    public static String average(int[] arr) {
-        double avg;
-        int sum = 0;
-        for (int i = 0; i < arr.length; i++) {
-            sum += arr[i];
-        }
-        avg = (double) sum / arr.length;
-        return Double.toString(avg);
-    }    
-
     public static int factorialQuestion(int points, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
         Scanner input = new Scanner(System.in);
         int ints = randNumbers(10);
@@ -251,6 +241,16 @@ public class Project {
         points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
         return points;
     }
+
+    public static String average(int[] arr) {
+        double avg;
+        int sum = 0;
+        for (int i = 0; i < arr.length; i++) {
+            sum += arr[i];
+        }
+        avg = (double) sum / arr.length;
+        return Double.toString(avg);
+    }    
 
     public static int averageQuestion(int points, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
         Scanner input = new Scanner(System.in);
@@ -273,11 +273,6 @@ public class Project {
         return Integer.toString(num1);
     }
 
-    public static String lcm(int num1, int num2) {
-        int lcm = (num1 * num2) / Integer.parseInt(gcd(num1, num2));
-        return Integer.toString(Math.abs(lcm));
-    }
-
     public static int gcdQuestion(int points, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
         Scanner input = new Scanner(System.in);
         int num1 = randNumbers(1000);
@@ -287,6 +282,11 @@ public class Project {
         String result = gcd(num1, num2);
         points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
         return points;
+    }
+
+    public static String lcm(int num1, int num2) {
+        int lcm = (num1 * num2) / Integer.parseInt(gcd(num1, num2));
+        return Integer.toString(Math.abs(lcm));
     }
 
     public static int lcmQuestion(int points, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
@@ -323,12 +323,23 @@ public class Project {
             }
             num = quotient;
         }
-
         String result = "";
         for (int i = str.length() - 1; i >= 0; i--){
             result += str.charAt(i);
         }
         return result;
+    }
+
+    public static int baseConversionQuestion(int points, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
+        Scanner input = new Scanner(System.in);
+        int num = randNumbers(1000);
+        int[] baseList = {2, 8, 16};
+        int base = baseList[(int)(Math.random() * baseList.length)];
+        System.out.print("Convert this number " + num + " into base " + base + "\nYour answer: ");
+        String userInput = input.nextLine().toUpperCase();
+        String result = baseConversion(num, base);
+        points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
+        return points;
     }
 
     public static String romanConversion(int num) {
@@ -347,7 +358,6 @@ public class Project {
             {"IV", "4"},
             {"I", "1"}
         };
-
         String result = "";
         for (String[] pair : symbolList) {
             String symbol = pair[0];
@@ -358,18 +368,6 @@ public class Project {
             }
         }
         return result;
-    }
-
-    public static int baseConversionQuestion(int points, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
-        Scanner input = new Scanner(System.in);
-        int num = randNumbers(1000);
-        int[] baseList = {2, 8, 16};
-        int base = baseList[(int)(Math.random() * baseList.length)];
-        System.out.print("Convert this number " + num + " into base " + base + "\nYour answer: ");
-        String userInput = input.nextLine().toUpperCase();
-        String result = baseConversion(num, base);
-        points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
-        return points;
     }
 
     public static int romanConversionQuestion(int points, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
