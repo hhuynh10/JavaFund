@@ -116,7 +116,7 @@ public class Project {
                 System.out.println("Game restarting now!");
             }
         } while (userAns.length() > 0 && userAns.charAt(0) == 'r');
-
+        
         System.out.println("Thank you for playing!");
     }
 
@@ -156,9 +156,9 @@ public class Project {
     }
 
     public static String randNumberString(int[] arr) {
-        StringBuilder str = new StringBuilder();
+        String str = "";
         for (int i = 0; i < arr.length; i++) {
-            str.append(arr[i]).append(" ");
+            str += arr[i] + " ";
         }
         return str.toString();
     }
