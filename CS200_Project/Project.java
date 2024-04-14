@@ -101,7 +101,8 @@ public class Project {
                         userPoints = romanConversionQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, HARD);
                         break;
                         case 2:
-                        System.out.println("Coming soon...");
+                        userPoints = standardDeviationQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, HARD);
+                        break;
                     }
                 }
             } while (0 < userPoints && userPoints < 150);
@@ -151,14 +152,27 @@ public class Project {
     }
 
     public static int randNumbers(int range) {
-        int randInt = (int)(Math.random() * range);
+        int randInt = (int)(Math.random() * range) + 1;
         return randInt;
     }
 
     public static int[] randNumbers(int numbers, int range) {
         int[] randNumberList = new int[numbers];
         for (int i = 0; i < randNumberList.length; i++) {
-            randNumberList[i] = (int) (Math.random() * range);
+            randNumberList[i] = (int)(Math.random() * range) + 1;
+        }
+        return randNumberList;
+    }
+
+    public static double randNumbers(double range) {
+        double randInt = Math.round((Math.random() * range) * 100.0) / 100.0 + 1;
+        return randInt;
+    }
+
+    public static double[] randNumbers(int numbers, double range) {
+        double[] randNumberList = new double[numbers];
+        for (int i = 0; i < randNumberList.length; i++) {
+            randNumberList[i] = Math.round((Math.random() * range) * 100.0) / 100.0 + 1;
         }
         return randNumberList;
     }
@@ -169,6 +183,14 @@ public class Project {
             str += arr[i] + " ";
         }
         return str.toString();
+    }
+
+    public static String randNumberString(double[] arr) {
+        String str = "";
+        for (int i = 0; i < arr.length; i++) {
+            str += arr[i] + " ";
+        }
+        return str;
     }
 
     public static int secretQuestion(int points, String[] congratsMessages) {
@@ -232,6 +254,7 @@ public class Project {
 
     // MATHEMATICAL METHODS
     // EASY QUESTION METHODS
+    // Factorial
     public static String factorial(int number) {
         int total = 1;
         for (int i = number; i > 0; i--) {
@@ -250,6 +273,7 @@ public class Project {
         return points;
     }
 
+    // Average
     public static String average(int[] arr) {
         double avg;
         int sum = 0;
@@ -271,6 +295,7 @@ public class Project {
         return points;
     }
 
+    // IsPrime
     public static String isPrime(int num) {
         if (num <= 1) {
             return Boolean.toString(false);
@@ -294,6 +319,7 @@ public class Project {
     }
 
     // MEDIUM QUESTION METHODS
+    // Greatest Common Divisor
     public static String gcd(int num1, int num2) {
         while (num2 != 0) {
             int temp = num2;
@@ -314,6 +340,7 @@ public class Project {
         return points;
     }
 
+    // Least Common Multiple
     public static String lcm(int num1, int num2) {
         int lcm = (num1 * num2) / Integer.parseInt(gcd(num1, num2));
         return Integer.toString(Math.abs(lcm));
@@ -330,6 +357,7 @@ public class Project {
         return points;
     }
 
+    // Sort and Find Index
     public static String findNum(int[] numList, int num){
         for (int i = 0; i < numList.length-1; i++){
             int minIndex = i;
@@ -375,6 +403,7 @@ public class Project {
     }
 
     // HARD QUESTION METHODS
+    // Base Conversion
     public static String baseConversion(int num, int base){
         String str = "";
         while (num > 0){
@@ -416,6 +445,7 @@ public class Project {
         return points;
     }
 
+    // Roman Numeral Conversion
     public static String romanConversion(int num) {
         String[][] symbolList = {
             {"M", "1000"},
@@ -450,6 +480,37 @@ public class Project {
         System.out.print("Convert this number " + num + " into Roman Numeral " + "\nYour answer: ");
         String userInput = input.nextLine().toUpperCase();
         String result = romanConversion(num);
+        points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
+        return points;
+    }
+
+    // Standard Deviation
+    public static String standardDeviation(double[] numList){
+        double sum = 0.0;
+        for (int i = 0; i < numList.length; i++){
+                sum += Math.pow(numList[i] - mean(numList), 2);
+        }
+        double standardDeviation = Math.sqrt(sum / numList.length);
+        double roundedResult = Math.round(standardDeviation * 100.0) / 100.0;
+        return Double.toString(roundedResult);
+    }
+
+    public static double mean(double[] numList){
+            double total = 0.0;
+            for (int i = 0; i < numList.length; i++){
+                    total += numList[i];
+            }
+            double mean = total / numList.length;
+            return mean;
+    }
+
+    public static int standardDeviationQuestion(int points, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
+        Scanner input = new Scanner(System.in);
+        double[] numList = randNumbers(10,200.0);
+        String numString = randNumberString(numList);
+        System.out.print("What is the standard deviation for this set of numbers (round to 2 decimal places): " + numString + "\nYour answer: ");
+        String userInput = input.nextLine();
+        String result = standardDeviation(numList);
         points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
         return points;
     }
