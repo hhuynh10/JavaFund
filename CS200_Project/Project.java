@@ -106,7 +106,7 @@ public class Project {
 
             userPoints = 50;
             userAttempts = 2;
-            System.out.print("Do you want to (R)estart or (E)xit? ");
+            System.out.print("Do you want to (R)estart or (E)xit the game? ");
             userAns = input.nextLine().toLowerCase();
             while (userAns.charAt(0) != 'r' && userAns.charAt(0) != 'e') {
                 System.out.print("Do you want to (R)estart or (E)xit the game? ");
