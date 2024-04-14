@@ -309,6 +309,7 @@ public class Project {
     }
 
     public static int isPrimeQuestion(int points, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
+        userAttempts = 1;
         Scanner input = new Scanner(System.in);
         int num = randNumbers(500);
         System.out.print("Is this number " + num + " a prime number? (True for Yes and False for No)" + "\nYour answer: ");
@@ -317,6 +318,7 @@ public class Project {
         points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
         return points;
     }
+
 
     // MEDIUM QUESTION METHODS
     // Greatest Common Divisor
@@ -402,6 +404,7 @@ public class Project {
         return points;
     }
 
+
     // HARD QUESTION METHODS
     // Base Conversion
     public static String baseConversion(int num, int base){
@@ -485,6 +488,15 @@ public class Project {
     }
 
     // Standard Deviation
+    public static double mean(double[] numList){
+        double total = 0.0;
+        for (int i = 0; i < numList.length; i++){
+                total += numList[i];
+        }
+        double mean = total / numList.length;
+        return mean;
+    }
+
     public static String standardDeviation(double[] numList){
         double sum = 0.0;
         for (int i = 0; i < numList.length; i++){
@@ -493,15 +505,6 @@ public class Project {
         double standardDeviation = Math.sqrt(sum / numList.length);
         double roundedResult = Math.round(standardDeviation * 100.0) / 100.0;
         return Double.toString(roundedResult);
-    }
-
-    public static double mean(double[] numList){
-            double total = 0.0;
-            for (int i = 0; i < numList.length; i++){
-                    total += numList[i];
-            }
-            double mean = total / numList.length;
-            return mean;
     }
 
     public static int standardDeviationQuestion(int points, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
