@@ -87,7 +87,14 @@ public class Project {
                         break;
                     }
                 } else if (userAns.length() > 0 && userAns.charAt(0) == 'h') {
-                    System.out.println("Incoming...");
+                    switch(randomQuestions){
+                        case 0:
+                        userPoints = baseConversionQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, HARD);
+                        break;
+                        // case 1:
+                        // userPoints = lcmQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, MEDIUM);
+                        // break;
+                    }
                 }
             } while (0 < userPoints && userPoints < 150);
             
@@ -132,17 +139,17 @@ public class Project {
         System.out.println(messageList[(int) (Math.random() * messageList.length)]);
     }
 
+    public static int randNumbers(int range) {
+        int randInt = (int)(Math.random() * range);
+        return randInt;
+    }
+
     public static int[] randNumbers(int numbers, int range) {
         int[] randNumberList = new int[numbers];
         for (int i = 0; i < randNumberList.length; i++) {
             randNumberList[i] = (int) (Math.random() * range);
         }
         return randNumberList;
-    }
-
-    public static int randNumbers(int range) {
-        int randInt = (int)(Math.random() * range);
-        return randInt;
     }
 
     public static String randNumberString(int[] arr) {
@@ -179,7 +186,7 @@ public class Project {
     }
     
     // MATHEMATICAL METHODS
-    // EASY METHODS
+    // EASY QUESTION METHODS
     public static int factorial(int number) {
         int total = 1;
         for (int i = number; i > 0; i--) {
@@ -271,7 +278,7 @@ public class Project {
         return points;
     }
 
-    // MEDIUM METHODS
+    // MEDIUM QUESTION METHODS
     public static int gcd(int num1, int num2) {
         while (num2 != 0) {
             int temp = num2;
@@ -346,6 +353,75 @@ public class Project {
                 userAttempts--;
             }
             if (userAttempts == 0 && userInput != result) {
+                System.out.println("Your answer is incorrect. The answer is: " + result);
+                points -= difficulty;
+                System.out.println("Your current points: " + points);
+            }
+        } else {
+            printMessages(congratsMessages);
+            points += difficulty;
+            System.out.println("Your current points: " + points);
+            // Secret question
+            points = secretQuestion(points, congratsMessages);
+        }
+        return points;
+    }
+
+    // HARD QUESTION METHODS
+    public static String baseConversion(int num, int base){
+        String str = "";
+        while (num > 0){
+            int quotient = num / base;
+            int remainder = num % base;
+            if (remainder == 10){
+                str += "A";
+            } else if (remainder == 11){
+                str += "B";
+            } else if (remainder == 12){
+                str += "C";
+            } else if (remainder == 13){
+                str += "D";
+            } else if (remainder == 14){
+                str += "E";
+            } else if (remainder == 15){
+                str += "F";
+            } else {
+                str += remainder;
+            }
+            num = quotient;
+        }
+
+        String result = "";
+        for (int i = str.length() - 1; i >= 0; i--){
+            result += str.charAt(i);
+        }
+        return result;
+    }
+
+    public static int baseConversionQuestion(int points, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
+        Scanner input = new Scanner(System.in);
+        int num = randNumbers(1000);
+        int[] baseList = {2, 8, 16};
+        int base = baseList[(int)(Math.random() * baseList.length)];
+        System.out.print("Convert this number " + num + " into base " + base + "\nYour answer: ");
+        String userInput = input.nextLine().toUpperCase();
+        String result = baseConversion(num, base);
+        if (!userInput.equals(result)) {
+            while (userAttempts > 0 && !userInput.equals(result)) {
+                printMessages(motivationMessages);
+                System.out.println("Number of attempts remaining: " + userAttempts);
+                System.out.print("Your answer: ");
+                userInput = input.nextLine();
+                if (userInput.equals(result)) {
+                    printMessages(congratsMessages);
+                    points += difficulty;
+                    System.out.println("Your current points: " + points);
+                    // Secret question
+                    points = secretQuestion(points, congratsMessages);
+                }
+                userAttempts--;
+            }
+            if (userAttempts == 0 && !userInput.equals(result)) {
                 System.out.println("Your answer is incorrect. The answer is: " + result);
                 points -= difficulty;
                 System.out.println("Your current points: " + points);
