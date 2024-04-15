@@ -36,7 +36,7 @@ public class Test {
     public static double[] randNumbers(int numbers, double range) {
         double[] randNumberList = new double[numbers];
         for (int i = 0; i < randNumberList.length; i++) {
-            randNumberList[i] = Math.round((Math.random() * range) * 100.0) / 100.0 + 1;
+            randNumberList[i] = Math.round((Math.random() * range) * 10.0) / 10.0 + 1;
         }
         return randNumberList;
     }

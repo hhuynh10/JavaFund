@@ -58,7 +58,8 @@ public class Project {
             userPoints = 50;
             do {
                 userAttempts = 2;
-                randomQuestions = (int)(Math.random() * 3);
+                // randomQuestions = (int)(Math.random() * 3);
+                randomQuestions = 3;
                 System.out.print("Would you like to choose easy, medium or hard question?\n" + "(E)asy, (M)edium, or (H)ard? ");
                 userAns = input.nextLine().toLowerCase();
 
@@ -78,6 +79,9 @@ public class Project {
                         break;
                         case 2:
                         userPoints = isPrimeQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, EASY);
+                        break;
+                        case 3:
+                        userPoints = tempConversionQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, EASY);
                         break;
                     }
                 } else if (userAns.length() > 0 && userAns.charAt(0) == 'm') {
@@ -311,7 +315,7 @@ public class Project {
     public static int isPrimeQuestion(int points, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
         userAttempts = 0;
         Scanner input = new Scanner(System.in);
-        int num = randNumbers(500);
+        int num = randNumbers(1000);
         System.out.print("Is this number " + num + " a prime number? (True for Yes and False for No)" + "\nYour answer: ");
         String userInput = input.nextLine().toLowerCase();
         String result = isPrime(num);
@@ -319,6 +323,29 @@ public class Project {
         return points;
     }
 
+    // Temperature Conversion
+    public static String celsiusToFahrenheit(int c) {
+        double result = (c * 9.0 / 5.0) + 32.0;
+        double roundedResult = Math.round(result * 10.0) / 10.0;
+        return Double.toString(roundedResult);
+    }
+
+    public static String fahrenheitToCelsius (int f){
+        double result = (f - 32.0) * 5.0 / 9.0;
+        double roundedResult = Math.round(result * 10.0) / 10.0;
+        return Double.toString(roundedResult);
+    }
+
+    public static int tempConversionQuestion(int points, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
+        Scanner input = new Scanner(System.in);
+        int randNum = (int)(Math.random() * 2);
+        int temp = randNumbers(200);
+        System.out.print("Convert this temperature " + temp + (randNum == 1 ? " to Fahrenheit" : " to Celsius") + " (round to 1 decimal places)" + "\nYour answer: ");
+        String userInput = input.nextLine();
+        String result = randNum == 1 ? celsiusToFahrenheit(temp) : fahrenheitToCelsius(temp);
+        points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
+        return points;
+    }
 
     // MEDIUM QUESTION METHODS
     // Greatest Common Divisor
@@ -479,7 +506,7 @@ public class Project {
 
     public static int romanConversionQuestion(int points, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
         Scanner input = new Scanner(System.in);
-        int num = randNumbers(10000);
+        int num = randNumbers(2000);
         System.out.print("Convert this number " + num + " into Roman Numeral " + "\nYour answer: ");
         String userInput = input.nextLine().toUpperCase();
         String result = romanConversion(num);
