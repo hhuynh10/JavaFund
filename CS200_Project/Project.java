@@ -59,7 +59,7 @@ public class Project {
             do {
                 userAttempts = 2;
                 // randomQuestions = (int)(Math.random() * 3);
-                randomQuestions = 3;
+                randomQuestions = 4;
                 System.out.print("Would you like to choose easy, medium or hard question?\n" + "(E)asy, (M)edium, or (H)ard? ");
                 userAns = input.nextLine().toLowerCase();
 
@@ -82,6 +82,9 @@ public class Project {
                         break;
                         case 3:
                         userPoints = tempConversionQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, EASY);
+                        break;
+                        case 4:
+                        userPoints = isArmstrongQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, EASY);
                         break;
                     }
                 } else if (userAns.length() > 0 && userAns.charAt(0) == 'm') {
@@ -343,6 +346,43 @@ public class Project {
         System.out.print("Convert this temperature " + temp + (randNum == 1 ? " to Fahrenheit" : " to Celsius") + " (round to 1 decimal places)" + "\nYour answer: ");
         String userInput = input.nextLine();
         String result = randNum == 1 ? celsiusToFahrenheit(temp) : fahrenheitToCelsius(temp);
+        points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
+        return points;
+    }
+
+    // Armstrong Number
+    public static String isArmstrong(int num, int power){
+        int originalNum = num;
+        int sum = 0;
+        while (num > 0 ){
+            int digit = num % 10;
+            sum += Math.pow(digit, power);
+            num /= 10;
+        }
+        if (originalNum == sum){
+            return Boolean.toString(true);
+        }
+        return Boolean.toString(false);
+    }
+
+    public static int isArmstrongQuestion(int points, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
+        userAttempts = 0;
+        Scanner input = new Scanner(System.in);
+        int num = randNumbers(99989) + 10;
+        int power = 0;
+        if (num >= 10000){
+            power = 5;
+        } else if (num >= 1000){
+            power = 4;
+        } else if (num >= 100){
+            power = 3;
+        } else if (num >= 10){
+            power = 2;
+        }
+        System.out.println("Armstrong number is a number that the sum of its individual digits, each raised to the power of the number of digits.");
+        System.out.print("Is this number " + num + " an armstrong number? (True for Yes and False for No)" + "\nYour answer: ");
+        String userInput = input.nextLine().toLowerCase();
+        String result = isArmstrong(num, power);
         points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
         return points;
     }
