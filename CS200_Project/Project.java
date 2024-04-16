@@ -263,6 +263,8 @@ public class Project {
     // EASY QUESTION METHODS
     // Factorial
     public static String factorial(int number) {
+        if (number == 0 || number == 1)
+        return Integer.toString(1);
         int total = 1;
         for (int i = number; i > 0; i--) {
             total *= i;
