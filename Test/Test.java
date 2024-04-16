@@ -10,7 +10,7 @@ public class Test {
         int[][] list = {{1, 2, 3}, {7, 8, 9}, {4, 5, 6}};
         System.out.println(highestSum(list));
 
-        int[][] arr = listGenerator(10, 500);
+        int[][] arr = nestedListGenerator(5, 20);
         for (int i = 0; i < arr.length; i++){
             for (int j = 0 ; j< arr.length; j++){
                 System.out.printf("%-6d", arr[i][j]);
@@ -18,9 +18,10 @@ public class Test {
             System.out.println();
         }
 
+        System.out.println(highestSum(arr));
     }
 
-    public static int[][] listGenerator(int numbers, int range) {
+    public static int[][] nestedListGenerator(int numbers, int range) {
         int[][] randNumberList = new int[numbers][numbers];
         for (int i = 0; i < randNumberList.length; i++) {
             for (int j = 0; j < randNumberList[i].length; j++) {
@@ -37,7 +38,6 @@ public class Test {
             for (int j = 0; j < list[i].length; j++){
                 rowTotal += list[i][j];
             }
-
             max = Math.max(max, rowTotal);
         }
         return Integer.toString(max);

@@ -59,8 +59,8 @@ public class Project {
             userPoints = 50;
             do {
                 userAttempts = 2;
-                // randomQuestions = (int)(Math.random() * 3);
-                randomQuestions = 5;
+                randomQuestions = (int)(Math.random() * 5);
+                // randomQuestions = 3;
                 System.out.print("Would you like to choose easy, medium or hard question?\n" + "(E)asy, (M)edium, or (H)ard? ");
                 userAns = input.nextLine().toLowerCase();
 
@@ -105,9 +105,6 @@ public class Project {
                         case 4:
                         userPoints = arithmeticProgressionQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, MEDIUM);
                         break;
-                        case 5:
-                        userPoints = geometricProgressionQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, MEDIUM);
-                        break;
                     }
                 } else if (userAns.length() > 0 && userAns.charAt(0) == 'h') {
                     switch(randomQuestions){
@@ -119,6 +116,12 @@ public class Project {
                         break;
                         case 2:
                         userPoints = standardDeviationQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, HARD);
+                        break;
+                        case 3:
+                        userPoints = highestSumQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, HARD);
+                        break;
+                        case 4:
+                        userPoints = geometricProgressionQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, HARD);
                         break;
                     }
                 }
@@ -173,6 +176,11 @@ public class Project {
         return randInt;
     }
 
+    public static double randNumbers(double range) {
+        double randInt = Math.round((Math.random() * range) * 100.0) / 100.0 + 1;
+        return randInt;
+    }
+
     public static int[] randNumbers(int numbers, int range) {
         int[] randNumberList = new int[numbers];
         for (int i = 0; i < randNumberList.length; i++) {
@@ -181,17 +189,22 @@ public class Project {
         return randNumberList;
     }
 
-    public static double randNumbers(double range) {
-        double randInt = Math.round((Math.random() * range) * 100.0) / 100.0 + 1;
-        return randInt;
-    }
-
     public static double[] randNumbers(int numbers, double range) {
         double[] randNumberList = new double[numbers];
         for (int i = 0; i < randNumberList.length; i++) {
             randNumberList[i] = Math.round((Math.random() * range) * 100.0) / 100.0 + 1;
         }
         return randNumberList;
+    }
+
+    public static int[][] nestedListGenerator(int numbers, int range) {
+        int[][] randNestedNumberList = new int[numbers][numbers];
+        for (int i = 0; i < randNestedNumberList.length; i++) {
+            for (int j = 0; j < randNestedNumberList[i].length; j++) {
+                randNestedNumberList[i][j] = (int) (Math.random() * range) + 1;
+            }
+        }
+        return randNestedNumberList;
     }
 
     public static String randNumberString(int[] arr) {
@@ -656,6 +669,37 @@ public class Project {
         System.out.print("What is the standard deviation for this set of numbers (round to 2 decimal places): " + numString + "\nYour answer: ");
         String userInput = input.nextLine().trim();
         String result = standardDeviation(numList);
+        points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
+        return points;
+    }
+
+    // Highest Sum 
+    public static String highestSum(int[][] nestedList){
+        int max = 0;
+        for (int i = 0 ; i < nestedList.length; i++){
+            int rowTotal = 0;
+            for (int j = 0; j < nestedList[i].length; j++){
+                rowTotal += nestedList[i][j];
+            }
+
+            max = Math.max(max, rowTotal);
+        }
+        return Integer.toString(max);
+    }
+
+    public static int highestSumQuestion(int points, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
+        Scanner input = new Scanner(System.in);
+        int length = randNumbers(5) + 10;
+        int[][] nestedNumList = nestedListGenerator(length, 999);
+        for (int i = 0; i < nestedNumList.length; i++){
+            for (int j = 0 ; j< nestedNumList.length; j++){
+                System.out.printf("%-6d", nestedNumList[i][j]);
+            }
+            System.out.println();
+        }
+        System.out.print("From the nested array above, find the row with the highest sum then return that sum. \nYour answer: ");
+        String userInput = input.nextLine().trim();
+        String result = highestSum(nestedNumList);
         points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
         return points;
     }
