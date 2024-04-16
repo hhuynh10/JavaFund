@@ -59,8 +59,8 @@ public class Project {
             userPoints = 50;
             do {
                 userAttempts = 2;
-                randomQuestions = (int)(Math.random() * 5);
-                // randomQuestions = 3;
+                // randomQuestions = (int)(Math.random() * 5);
+                randomQuestions = 5;
                 System.out.print("Would you like to choose easy, medium or hard question?\n" + "(E)asy, (M)edium, or (H)ard? ");
                 userAns = input.nextLine().toLowerCase();
 
@@ -86,6 +86,9 @@ public class Project {
                         break;
                         case 4:
                         userPoints = isArmstrongQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, EASY);
+                        break;
+                        case 5:
+                        userPoints = areaQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, EASY);
                         break;
                     }
                 } else if (userAns.length() > 0 && userAns.charAt(0) == 'm') {
@@ -412,17 +415,30 @@ public class Project {
     }
 
     // Area of rectangular and square
-    public static int area(double length, double width) {
+    public static String area(double length, double width) {
         double result = length * width;
-        return Double.toString(result);
+        double roundedResult = Math.round(result * 10.0) / 10.0;
+        return Double.toString(roundedResult);
     }
 
-    //  area of a square
     public static String area(int side) {
-        int result = (int)Math.pow(side, 2);
-        return Integer.toString(result);
+        double result = Math.pow(side, 2);
+        double roundedResult = Math.round(result * 10.0) / 10.0;
+        return Double.toString(roundedResult);
     }
 
+    public static int areaQuestion(int points, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
+        Scanner input = new Scanner(System.in);
+        int randNum = (int)(Math.random() * 2);
+        int side = randNumbers(20);
+        double length = randNumbers(20.0);
+        double width = randNumbers(20.0);
+        System.out.print("Find the area of this " + (randNum == 1 ? "Rectangular figure " : "Square figure ") + " (round to 1 decimal places)\n" + (randNum == 1 ? "Length: " + length + " and width: " + width : "Side: " + side) + "\nYour answer: ");
+        String userInput = input.nextLine().trim();
+        String result = randNum == 1 ? area(length, width) : area(side);
+        points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
+        return points;
+    }
 
 
     // MEDIUM QUESTION METHODS
