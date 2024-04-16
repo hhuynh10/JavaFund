@@ -1,3 +1,4 @@
+import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -8,6 +9,8 @@ public class Test {
 
         int[][] list = {{1, 2, 3}, {7, 8, 9}, {4, 5, 6}};
         System.out.println(highestSum(list));
+
+        System.out.println(geometricProgression(7, 3, 7));
     }
 
 
@@ -33,4 +36,10 @@ public class Test {
 
         return Integer.toString(max);
     }
+
+    public static int geometricProgression(int firstTerm, int commonRatio, int numberOfTerms) {
+        double sum = firstTerm * (1 - Math.pow(commonRatio, numberOfTerms)) / (1 - commonRatio);
+        return (int)sum;
+    }
 }
+

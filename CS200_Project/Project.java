@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.math.BigInteger;
 
 public class Project {
     public static void main(String args[]) {
@@ -59,7 +60,7 @@ public class Project {
             do {
                 userAttempts = 2;
                 // randomQuestions = (int)(Math.random() * 3);
-                randomQuestions = 4;
+                randomQuestions = 5;
                 System.out.print("Would you like to choose easy, medium or hard question?\n" + "(E)asy, (M)edium, or (H)ard? ");
                 userAns = input.nextLine().toLowerCase();
 
@@ -97,6 +98,15 @@ public class Project {
                         break;
                         case 2:
                         userPoints = findNumQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, MEDIUM);
+                        break;
+                        case 3:
+                        userPoints = binomialCoefficientQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, MEDIUM);
+                        break;
+                        case 4:
+                        userPoints = arithmeticProgressionQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, MEDIUM);
+                        break;
+                        case 5:
+                        userPoints = geometricProgressionQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, MEDIUM);
                         break;
                     }
                 } else if (userAns.length() > 0 && userAns.charAt(0) == 'h') {
@@ -213,7 +223,7 @@ public class Project {
             if (userInput.equals("y")) {
                 int randNum = (int)(Math.random() * 10);
                 System.out.print("Guess a random number from 0 - 9: ");
-                userInput = input.nextLine();
+                userInput = input.nextLine().trim();
                 if (userInput.equals(Integer.toString(randNum))) {
                     printMessages(congratsMessages);
                     points += 50;
@@ -235,7 +245,7 @@ public class Project {
                 printMessages(motivationMessages);
                 System.out.println("Number of attempts remaining: " + userAttempts);
                 System.out.print("Your answer: ");
-                userInput = input.next();
+                userInput = input.nextLine().trim();
                 if (userInput.equals(result)) {
                     printMessages(congratsMessages);
                     points += difficulty;
@@ -275,8 +285,8 @@ public class Project {
     public static int factorialQuestion(int points, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
         Scanner input = new Scanner(System.in);
         int num = randNumbers(10);
-        System.out.print("What is the factorial of this number: " + num + "\nYour answer: ");
-        String userInput = input.next();
+        System.out.print("What is the Factorial of this number: " + num + "\nYour answer: ");
+        String userInput = input.nextLine().trim();
         String result = factorial(num);
         points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
         return points;
@@ -297,8 +307,8 @@ public class Project {
         Scanner input = new Scanner(System.in);
         int[] numList = randNumbers(5,500);
         String numString = randNumberString(numList);
-        System.out.print("What is the average for this set of numbers (1 decimal place): " + numString + "\nYour answer: ");
-        String userInput = input.next();
+        System.out.print("What is the Average for this set of numbers (1 decimal place): " + numString + "\nYour answer: ");
+        String userInput = input.nextLine().trim();
         String result = average(numList);
         points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
         return points;
@@ -321,8 +331,8 @@ public class Project {
         userAttempts = 0;
         Scanner input = new Scanner(System.in);
         int num = randNumbers(1000);
-        System.out.print("Is this number " + num + " a prime number? (True for Yes and False for No)" + "\nYour answer: ");
-        String userInput = input.next().toLowerCase();
+        System.out.print("Is this number " + num + " a Prime number? (True for Yes and False for No)" + "\nYour answer: ");
+        String userInput = input.nextLine().trim().toLowerCase();
         String result = isPrime(num);
         points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
         return points;
@@ -346,7 +356,7 @@ public class Project {
         int randNum = (int)(Math.random() * 2);
         int temp = randNumbers(200);
         System.out.print("Convert this temperature " + temp + (randNum == 1 ? " to Fahrenheit" : " to Celsius") + " (round to 1 decimal places)" + "\nYour answer: ");
-        String userInput = input.next();
+        String userInput = input.nextLine().trim();
         String result = randNum == 1 ? celsiusToFahrenheit(temp) : fahrenheitToCelsius(temp);
         points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
         return points;
@@ -381,9 +391,8 @@ public class Project {
         } else if (num >= 10){
             power = 2;
         }
-        System.out.println("Armstrong number is a number that the sum of its individual digits, each raised to the power of the number of digits.");
-        System.out.print("Is this number " + num + " an armstrong number? (True for Yes and False for No)" + "\nYour answer: ");
-        String userInput = input.next().toLowerCase();
+        System.out.print("Is this number " + num + " an Armstrong number? (True for Yes and False for No)" + "\nYour answer: ");
+        String userInput = input.nextLine().trim().toLowerCase();
         String result = isArmstrong(num, power);
         points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
         return points;
@@ -404,8 +413,8 @@ public class Project {
         Scanner input = new Scanner(System.in);
         int num1 = randNumbers(500);
         int num2 = randNumbers(250);
-        System.out.print("What is the greatest common divisor of these number: " + num1 + " and " + num2 + "\nYour answer: ");
-        String userInput = input.next();
+        System.out.print("What is the Greatest Common Divisor of these number: " + num1 + " and " + num2 + "\nYour answer: ");
+        String userInput = input.nextLine().trim();
         String result = gcd(num1, num2);
         points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
         return points;
@@ -421,8 +430,8 @@ public class Project {
         Scanner input = new Scanner(System.in);
         int num1 = randNumbers(250);
         int num2 = randNumbers(125);
-        System.out.print("What is the least common multiple of these number: " + num1 + " and " + num2 + "\nYour answer: ");
-        String userInput = input.next();
+        System.out.print("What is the Least Common Multiple of these number: " + num1 + " and " + num2 + "\nYour answer: ");
+        String userInput = input.nextLine().trim();
         String result = lcm(num1, num2);
         points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
         return points;
@@ -467,12 +476,76 @@ public class Project {
         int num = numList[(int)(Math.random() * numList.length)]; 
         String numString = randNumberString(numList);
         System.out.print("Sort in none decreasing order and find the index of this number " + num + " in this array:\n" + numString + "\nYour answer: ");
-        String userInput = input.next();
+        String userInput = input.nextLine().trim();
         String result = findNum(numList, num);
         points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
         return points;
     }
 
+    // Binomial Coefficient
+    public static BigInteger factorial(long number) {
+        if (number == 0 || number == 1) {
+            return BigInteger.ONE;
+        }
+        BigInteger total = BigInteger.ONE;
+        for (long i = 2; i <= number; i++) {
+            total = total.multiply(BigInteger.valueOf(i));
+        }
+        return total;
+    }
+
+    public static String binomialCoefficient(long n, long k) {
+        BigInteger result = factorial(n).divide(factorial(k).multiply(factorial(n - k)));
+        return result.toString();
+    }
+
+    public static int binomialCoefficientQuestion(int points, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
+        Scanner input = new Scanner(System.in);
+        int n = randNumbers(90) + 9;
+        int k = randNumbers(9);
+        System.out.print("What is the Binomial Coefficient of these number: " + n + " and " + k + "\nYour answer: ");
+        String userInput = input.nextLine().trim();
+        String result = binomialCoefficient(n, k);
+        points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
+        return points;
+    }
+
+    // Arithmetic Progression Sum
+    public static String arithmeticProgression(int firstTerm, int commonDifference, int numberOfTerms) {
+        int lastTerm = firstTerm + (numberOfTerms - 1) * commonDifference;
+        int sum = (numberOfTerms * (firstTerm + lastTerm)) / 2;
+        return Integer.toString(sum);
+    }
+
+    public static int arithmeticProgressionQuestion(int points, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
+        Scanner input = new Scanner(System.in);
+        int firstTerm = randNumbers(9);
+        int commonDifference = randNumbers(9);
+        int numberOfTerms = randNumbers(9);
+        System.out.print("Calculate sum of the arithmetic progression up to the " + numberOfTerms + "th term with " + firstTerm + " is the first term and " + commonDifference + " is the common difference" + "\nYour answer: ");
+        String userInput = input.nextLine().trim();
+        String result = arithmeticProgression(firstTerm, commonDifference, numberOfTerms);
+        points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
+        return points;
+    }
+
+    // Geometric Progression Sum
+    public static String geometricProgression(int firstTerm, int commonRatio, int numberOfTerms) {
+        double sum = firstTerm * (1 - Math.pow(commonRatio, numberOfTerms)) / (1 - commonRatio);
+        return Integer.toString((int)sum);
+    }
+
+    public static int geometricProgressionQuestion(int points, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
+        Scanner input = new Scanner(System.in);
+        int firstTerm = randNumbers(9);
+        int commonRatio = randNumbers(9);
+        int numberOfTerms = randNumbers(9);
+        System.out.print("Calculate sum of the geometric progression up to the " + numberOfTerms + "th term with " + firstTerm + " is the first term and " + commonRatio + " is the common difference" + "\nYour answer: ");
+        String userInput = input.nextLine().trim();
+        String result = geometricProgression(firstTerm, commonRatio, numberOfTerms);
+        points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
+        return points;
+    }
 
     // HARD QUESTION METHODS
     // Base Conversion
@@ -511,7 +584,7 @@ public class Project {
         int[] baseList = {2, 8, 16};
         int base = baseList[(int)(Math.random() * baseList.length)];
         System.out.print("Convert this number " + num + " into base " + base + "\nYour answer: ");
-        String userInput = input.next().toUpperCase();
+        String userInput = input.nextLine().trim().toUpperCase();
         String result = baseConversion(num, base);
         points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
         return points;
@@ -550,7 +623,7 @@ public class Project {
         Scanner input = new Scanner(System.in);
         int num = randNumbers(2000);
         System.out.print("Convert this number " + num + " into Roman Numeral " + "\nYour answer: ");
-        String userInput = input.next().toUpperCase();
+        String userInput = input.nextLine().trim().toUpperCase();
         String result = romanConversion(num);
         points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
         return points;
@@ -581,7 +654,7 @@ public class Project {
         double[] numList = randNumbers(10,200.0);
         String numString = randNumberString(numList);
         System.out.print("What is the standard deviation for this set of numbers (round to 2 decimal places): " + numString + "\nYour answer: ");
-        String userInput = input.next();
+        String userInput = input.nextLine().trim();
         String result = standardDeviation(numList);
         points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
         return points;
