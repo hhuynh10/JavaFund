@@ -5,8 +5,8 @@ public class Project {
     public static void main(String args[]) {
         Scanner input = new Scanner(System.in);
 
-        final int EASY = 10;
-        final int MEDIUM = 15;
+        final int EASY = 5;
+        final int MEDIUM = 10;
         final int HARD = 20;
 
         int userPoints;
@@ -411,6 +411,20 @@ public class Project {
         return points;
     }
 
+    // Area of rectangular and square
+    public static int area(double length, double width) {
+        double result = length * width;
+        return Double.toString(result);
+    }
+
+    //  area of a square
+    public static String area(int side) {
+        int result = (int)Math.pow(side, 2);
+        return Integer.toString(result);
+    }
+
+
+
     // MEDIUM QUESTION METHODS
     // Greatest Common Divisor
     public static String gcd(int num1, int num2) {
@@ -681,7 +695,6 @@ public class Project {
             for (int j = 0; j < nestedList[i].length; j++){
                 rowTotal += nestedList[i][j];
             }
-
             max = Math.max(max, rowTotal);
         }
         return Integer.toString(max);
@@ -689,7 +702,7 @@ public class Project {
 
     public static int highestSumQuestion(int points, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
         Scanner input = new Scanner(System.in);
-        int length = randNumbers(5) + 10;
+        int length = randNumbers(4) + 10;
         int[][] nestedNumList = nestedListGenerator(length, 999);
         for (int i = 0; i < nestedNumList.length; i++){
             for (int j = 0 ; j < nestedNumList.length; j++){
