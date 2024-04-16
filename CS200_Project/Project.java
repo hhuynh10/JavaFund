@@ -692,7 +692,7 @@ public class Project {
         int length = randNumbers(5) + 10;
         int[][] nestedNumList = nestedListGenerator(length, 999);
         for (int i = 0; i < nestedNumList.length; i++){
-            for (int j = 0 ; j< nestedNumList.length; j++){
+            for (int j = 0 ; j < nestedNumList.length; j++){
                 System.out.printf("%-6d", nestedNumList[i][j]);
             }
             System.out.println();
