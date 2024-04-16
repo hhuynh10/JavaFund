@@ -475,7 +475,7 @@ public class Project {
         int[] numList = randNumbers(25, 1000);
         int num = numList[(int)(Math.random() * numList.length)]; 
         String numString = randNumberString(numList);
-        System.out.print("Sort in none decreasing order and find the index of this number " + num + " in this array:\n" + numString + "\nYour answer: ");
+        System.out.print("Sort in a none decreasing order and find the index of this number " + num + " in this array:\n" + numString + "\nYour answer: ");
         String userInput = input.nextLine().trim();
         String result = findNum(numList, num);
         points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);

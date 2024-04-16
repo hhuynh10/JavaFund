@@ -4,21 +4,28 @@ import java.util.Scanner;
 
 public class Test {
     public static void main(String[] args) {
-        System.out.println(Arrays.toString(randNumbers(10, 20.0)));
+
 
 
         int[][] list = {{1, 2, 3}, {7, 8, 9}, {4, 5, 6}};
         System.out.println(highestSum(list));
 
-        System.out.println(geometricProgression(7, 3, 7));
+        int[][] arr = listGenerator(10, 500);
+        for (int i = 0; i < arr.length; i++){
+            for (int j = 0 ; j< arr.length; j++){
+                System.out.printf("%-6d", arr[i][j]);
+            }
+            System.out.println();
+        }
+
     }
 
-
-
-    public static double[] randNumbers(int numbers, double range) {
-        double[] randNumberList = new double[numbers];
+    public static int[][] listGenerator(int numbers, int range) {
+        int[][] randNumberList = new int[numbers][numbers];
         for (int i = 0; i < randNumberList.length; i++) {
-            randNumberList[i] = Math.round((Math.random() * range) * 10.0) / 10.0 + 1;
+            for (int j = 0; j < randNumberList[i].length; j++) {
+                randNumberList[i][j] = (int) (Math.random() * range) + 1;
+            }
         }
         return randNumberList;
     }
@@ -33,13 +40,7 @@ public class Test {
 
             max = Math.max(max, rowTotal);
         }
-
         return Integer.toString(max);
-    }
-
-    public static int geometricProgression(int firstTerm, int commonRatio, int numberOfTerms) {
-        double sum = firstTerm * (1 - Math.pow(commonRatio, numberOfTerms)) / (1 - commonRatio);
-        return (int)sum;
     }
 }
 
