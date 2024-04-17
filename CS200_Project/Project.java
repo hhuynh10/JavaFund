@@ -415,14 +415,14 @@ public class Project {
     }
 
     // Area of rectangular and square
-    public static String area(double length, double width) {
-        double result = length * width;
+    public static String area(int side) {
+        double result = Math.pow(side, 2);
         double roundedResult = Math.round(result * 10.0) / 10.0;
         return Double.toString(roundedResult);
     }
 
-    public static String area(int side) {
-        double result = Math.pow(side, 2);
+    public static String area(double length, double width) {
+        double result = length * width;
         double roundedResult = Math.round(result * 10.0) / 10.0;
         return Double.toString(roundedResult);
     }
@@ -430,12 +430,21 @@ public class Project {
     public static int areaQuestion(int points, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
         Scanner input = new Scanner(System.in);
         int randNum = (int)(Math.random() * 2);
-        int side = randNumbers(20);
-        double length = randNumbers(20.0);
-        double width = randNumbers(20.0);
-        System.out.print("Find the area of this " + (randNum == 1 ? "Rectangular figure " : "Square figure ") + " (round to 1 decimal places)\n" + (randNum == 1 ? "Length: " + length + " and width: " + width : "Side: " + side) + "\nYour answer: ");
+        String result = "";
+        switch(randNum){
+            case 0: 
+            int side = randNumbers(20);
+            System.out.print("Find the area of this Square figure (round to 1 decimal places)\n" + "Side: " + side + "\nYour answer: ");
+            result = area(side);
+            break;
+            case 1: 
+            double length = randNumbers(20.0);
+            double width = randNumbers(20.0);
+            System.out.print("Find the area of this Rectangular figure (round to 1 decimal places)\n" + "Length: " + length + " and width: " + width + "\nYour answer: ");
+            result = area(length, width);
+            break;
+        }p
         String userInput = input.nextLine().trim();
-        String result = randNum == 1 ? area(length, width) : area(side);
         points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
         return points;
     }
