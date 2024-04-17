@@ -85,9 +85,6 @@ public class Project {
                         userPoints = tempConversionQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, EASY);
                         break;
                         case 4:
-                        userPoints = isArmstrongQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, EASY);
-                        break;
-                        case 5:
                         userPoints = areaQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, EASY);
                         break;
                     }
@@ -107,6 +104,9 @@ public class Project {
                         break;
                         case 4:
                         userPoints = arithmeticProgressionQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, MEDIUM);
+                        break;
+                        case 5:
+                        userPoints = isArmstrongQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, MEDIUM);
                         break;
                     }
                 } else if (userAns.length() > 0 && userAns.charAt(0) == 'h') {
@@ -378,43 +378,7 @@ public class Project {
         return points;
     }
 
-    // Armstrong Number
-    public static String isArmstrong(int num, int power){
-        int originalNum = num;
-        int sum = 0;
-        while (num > 0 ){
-            int digit = num % 10;
-            sum += Math.pow(digit, power);
-            num /= 10;
-        }
-        if (originalNum == sum){
-            return Boolean.toString(true);
-        }
-        return Boolean.toString(false);
-    }
-
-    public static int isArmstrongQuestion(int points, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
-        userAttempts = 0;
-        Scanner input = new Scanner(System.in);
-        int num = randNumbers(99989) + 10;
-        int power = 0;
-        if (num >= 10000){
-            power = 5;
-        } else if (num >= 1000){
-            power = 4;
-        } else if (num >= 100){
-            power = 3;
-        } else if (num >= 10){
-            power = 2;
-        }
-        System.out.print("Is this number " + num + " an Armstrong number? (True for Yes and False for No)" + "\nYour answer: ");
-        String userInput = input.nextLine().trim().toLowerCase();
-        String result = isArmstrong(num, power);
-        points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
-        return points;
-    }
-
-    // Area of rectangular and square
+    // Area of different 
     public static String area(int side) {
         double result = Math.pow(side, 2);
         double roundedResult = Math.round(result * 10.0) / 10.0;
@@ -443,7 +407,7 @@ public class Project {
             System.out.print("Find the area of this Rectangular figure (round to 1 decimal places)\n" + "Length: " + length + " and width: " + width + "\nYour answer: ");
             result = area(length, width);
             break;
-        }p
+        }
         String userInput = input.nextLine().trim();
         points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
         return points;
@@ -595,6 +559,42 @@ public class Project {
         System.out.print("Calculate sum of the geometric progression up to the " + numberOfTerms + "th term with " + firstTerm + " is the first term and " + commonRatio + " is the common difference" + "\nYour answer: ");
         String userInput = input.nextLine().trim();
         String result = geometricProgression(firstTerm, commonRatio, numberOfTerms);
+        points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
+        return points;
+    }
+
+    // Armstrong Number
+    public static String isArmstrong(int num, int power){
+        int originalNum = num;
+        int sum = 0;
+        while (num > 0 ){
+            int digit = num % 10;
+            sum += Math.pow(digit, power);
+            num /= 10;
+        }
+        if (originalNum == sum){
+            return Boolean.toString(true);
+        }
+        return Boolean.toString(false);
+    }
+
+    public static int isArmstrongQuestion(int points, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
+        userAttempts = 0;
+        Scanner input = new Scanner(System.in);
+        int num = randNumbers(99989) + 10;
+        int power = 0;
+        if (num >= 10000){
+            power = 5;
+        } else if (num >= 1000){
+            power = 4;
+        } else if (num >= 100){
+            power = 3;
+        } else if (num >= 10){
+            power = 2;
+        }
+        System.out.print("Is this number " + num + " an Armstrong number? (True for Yes and False for No)" + "\nYour answer: ");
+        String userInput = input.nextLine().trim().toLowerCase();
+        String result = isArmstrong(num, power);
         points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
         return points;
     }
