@@ -60,7 +60,7 @@ public class Project {
             do {
                 userAttempts = 2;
                 // randomQuestions = (int)(Math.random() * 5);
-                randomQuestions = 5;
+                randomQuestions = 6;
                 System.out.print("Would you like to choose easy, medium or hard question?\n" + "(E)asy, (M)edium, or (H)ard? ");
                 userAns = input.nextLine().toLowerCase();
 
@@ -85,6 +85,12 @@ public class Project {
                         userPoints = tempConversionQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, EASY);
                         break;
                         case 4:
+                        userPoints = isArmstrongQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, EASY);
+                        break;
+                        case 5:
+                        userPoints = findNumQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, MEDIUM);
+                        break;
+                        case 6:
                         userPoints = areaQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, EASY);
                         break;
                     }
@@ -97,16 +103,13 @@ public class Project {
                         userPoints = lcmQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, MEDIUM);
                         break;
                         case 2:
-                        userPoints = findNumQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, MEDIUM);
-                        break;
-                        case 3:
                         userPoints = binomialCoefficientQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, MEDIUM);
                         break;
-                        case 4:
+                        case 3:
                         userPoints = arithmeticProgressionQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, MEDIUM);
                         break;
-                        case 5:
-                        userPoints = isArmstrongQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, MEDIUM);
+                        case 4:
+                        userPoints = bankingQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, MEDIUM);
                         break;
                     }
                 } else if (userAns.length() > 0 && userAns.charAt(0) == 'h') {
@@ -287,7 +290,7 @@ public class Project {
 
     // MATHEMATICAL METHODS
     // EASY QUESTION METHODS
-    // Factorial
+    // 1. Factorial
     public static String factorial(int number) {
         if (number == 0 || number == 1)
         return Integer.toString(1);
@@ -308,7 +311,7 @@ public class Project {
         return points;
     }
 
-    // Average
+    // 2. Average
     public static String average(int[] arr) {
         double avg;
         int sum = 0;
@@ -330,7 +333,7 @@ public class Project {
         return points;
     }
 
-    // IsPrime
+    // 3. IsPrime
     public static String isPrime(int num) {
         if (num <= 1) {
             return Boolean.toString(false);
@@ -354,7 +357,7 @@ public class Project {
         return points;
     }
 
-    // Temperature Conversion
+    // 4. Temperature Conversion
     public static String celsiusToFahrenheit(int c) {
         double result = (c * 9.0 / 5.0) + 32.0;
         double roundedResult = Math.round(result * 10.0) / 10.0;
@@ -378,82 +381,43 @@ public class Project {
         return points;
     }
 
-    // Area of different 
-    public static String area(int side) {
-        double result = Math.pow(side, 2);
-        double roundedResult = Math.round(result * 10.0) / 10.0;
-        return Double.toString(roundedResult);
-    }
-
-    public static String area(double length, double width) {
-        double result = length * width;
-        double roundedResult = Math.round(result * 10.0) / 10.0;
-        return Double.toString(roundedResult);
-    }
-
-    public static int areaQuestion(int points, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
-        Scanner input = new Scanner(System.in);
-        int randNum = (int)(Math.random() * 2);
-        String result = "";
-        switch(randNum){
-            case 0: 
-            int side = randNumbers(20);
-            System.out.print("Find the area of this Square figure (round to 1 decimal places)\n" + "Side: " + side + "\nYour answer: ");
-            result = area(side);
-            break;
-            case 1: 
-            double length = randNumbers(20.0);
-            double width = randNumbers(20.0);
-            System.out.print("Find the area of this Rectangular figure (round to 1 decimal places)\n" + "Length: " + length + " and width: " + width + "\nYour answer: ");
-            result = area(length, width);
-            break;
+    // 5. Armstrong Number
+    public static String isArmstrong(int num, int power){
+        int originalNum = num;
+        int sum = 0;
+        while (num > 0 ){
+            int digit = num % 10;
+            sum += Math.pow(digit, power);
+            num /= 10;
         }
-        String userInput = input.nextLine().trim();
-        points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
-        return points;
-    }
-
-
-    // MEDIUM QUESTION METHODS
-    // Greatest Common Divisor
-    public static String gcd(int num1, int num2) {
-        while (num2 != 0) {
-            int temp = num2;
-            num2 = num1 % num2;
-            num1 = temp;
+        if (originalNum == sum){
+            return Boolean.toString(true);
         }
-        return Integer.toString(num1);
+        return Boolean.toString(false);
     }
 
-    public static int gcdQuestion(int points, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
+    public static int isArmstrongQuestion(int points, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
+        userAttempts = 0;
         Scanner input = new Scanner(System.in);
-        int num1 = randNumbers(500);
-        int num2 = randNumbers(250);
-        System.out.print("What is the Greatest Common Divisor of these number: " + num1 + " and " + num2 + "\nYour answer: ");
-        String userInput = input.nextLine().trim();
-        String result = gcd(num1, num2);
+        int num = randNumbers(99989) + 10;
+        int power = 0;
+        if (num >= 10000){
+            power = 5;
+        } else if (num >= 1000){
+            power = 4;
+        } else if (num >= 100){
+            power = 3;
+        } else if (num >= 10){
+            power = 2;
+        }
+        System.out.print("Is this number " + num + " an Armstrong number? (True for Yes and False for No)" + "\nYour answer: ");
+        String userInput = input.nextLine().trim().toLowerCase();
+        String result = isArmstrong(num, power);
         points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
         return points;
     }
 
-    // Least Common Multiple
-    public static String lcm(int num1, int num2) {
-        int lcm = (num1 * num2) / Integer.parseInt(gcd(num1, num2));
-        return Integer.toString(Math.abs(lcm));
-    }
-
-    public static int lcmQuestion(int points, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
-        Scanner input = new Scanner(System.in);
-        int num1 = randNumbers(250);
-        int num2 = randNumbers(125);
-        System.out.print("What is the Least Common Multiple of these number: " + num1 + " and " + num2 + "\nYour answer: ");
-        String userInput = input.nextLine().trim();
-        String result = lcm(num1, num2);
-        points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
-        return points;
-    }
-
-    // Sort and Find Index
+    // 6. Sort and Find Index
     public static String findNum(int[] numList, int num){
         for (int i = 0; i < numList.length-1; i++){
             int minIndex = i;
@@ -498,7 +462,117 @@ public class Project {
         return points;
     }
 
-    // Binomial Coefficient
+    // 7. Area of different figures
+    public static String squareArea(double side) {
+        double result = Math.pow(side, 2);
+        double roundedResult = Math.round(result * 10.0) / 10.0;
+        return Double.toString(roundedResult);
+    }
+
+    public static String rectangularArea(double length, double width) {
+        double result = length * width;
+        double roundedResult = Math.round(result * 10.0) / 10.0;
+        return Double.toString(roundedResult);
+    }
+
+    public static String triangleArea(double base, double height) {
+        double result = 0.5 * base * height;
+        double roundedResult = Math.round(result * 10.0) / 10.0;
+        return Double.toString(roundedResult);
+    }
+
+    public static String circleArea(double radius) {
+        double result = Math.PI * Math.pow(radius, 2);
+        double roundedResult = Math.round(result * 10.0) / 10.0;
+        return Double.toString(roundedResult);
+    }
+
+    public static String cylinderArea(double radius, double height) {
+        double result = 2 * Math.PI * radius * (radius + height);
+        double roundedResult = Math.round(result * 10.0) / 10.0;
+        return Double.toString(roundedResult);
+    }
+
+    public static int areaQuestion(int points, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
+        Scanner input = new Scanner(System.in);
+        int randNum = (int)(Math.random() * 5);
+        String result = "";
+        switch(randNum){
+            case 0: 
+            double side = randNumbers(20.0);
+            System.out.print("Find the area of this Square figure (round to 1 decimal places)\n" + "Side: " + side + "\nYour answer: ");
+            result = squareArea(side);
+            break;
+            case 1: 
+            double length = randNumbers(20.0);
+            double width = randNumbers(20.0);
+            System.out.print("Find the area of this Rectangular figure (round to 1 decimal places)\n" + "Length: " + length + " and Width: " + width + "\nYour answer: ");
+            result = rectangularArea(length, width);
+            break;
+            case 2: 
+            double base = randNumbers(20.0);
+            double height = randNumbers(20.0);
+            System.out.print("Find the area of this Triangle figure (round to 1 decimal places)\n" + "Base: " + base + " and Height: " + height + "\nYour answer: ");
+            result = triangleArea(base, height);
+            break;
+            case 3: 
+            double radius = randNumbers(20.0);
+            System.out.print("Find the area of this Circle figure (round to 1 decimal places)\n" + "Radius: " + radius + "\nYour answer: ");
+            result = circleArea(radius);
+            break;
+            case 4: 
+            double radius1 = randNumbers(20.0);
+            double height1 = randNumbers(20.0);
+            System.out.print("Find the area of this Cylinder figure (round to 1 decimal places)\n" + "Radius: " + radius1 + " and Height: " + height1 + "\nYour answer: ");
+            result = cylinderArea(radius1, height1);
+            break;
+        }
+        String userInput = input.nextLine().trim();
+        points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
+        return points;
+    }
+
+
+    // MEDIUM QUESTION METHODS
+    // 1. Greatest Common Divisor
+    public static String gcd(int num1, int num2) {
+        while (num2 != 0) {
+            int temp = num2;
+            num2 = num1 % num2;
+            num1 = temp;
+        }
+        return Integer.toString(num1);
+    }
+
+    public static int gcdQuestion(int points, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
+        Scanner input = new Scanner(System.in);
+        int num1 = randNumbers(500);
+        int num2 = randNumbers(250);
+        System.out.print("What is the Greatest Common Divisor of these number: " + num1 + " and " + num2 + "\nYour answer: ");
+        String userInput = input.nextLine().trim();
+        String result = gcd(num1, num2);
+        points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
+        return points;
+    }
+
+    // 2. Least Common Multiple
+    public static String lcm(int num1, int num2) {
+        int lcm = (num1 * num2) / Integer.parseInt(gcd(num1, num2));
+        return Integer.toString(Math.abs(lcm));
+    }
+
+    public static int lcmQuestion(int points, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
+        Scanner input = new Scanner(System.in);
+        int num1 = randNumbers(250);
+        int num2 = randNumbers(125);
+        System.out.print("What is the Least Common Multiple of these number: " + num1 + " and " + num2 + "\nYour answer: ");
+        String userInput = input.nextLine().trim();
+        String result = lcm(num1, num2);
+        points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
+        return points;
+    }
+
+    // 3. Binomial Coefficient
     public static BigInteger factorial(long number) {
         if (number == 0 || number == 1) {
             return BigInteger.ONE;
@@ -526,7 +600,7 @@ public class Project {
         return points;
     }
 
-    // Arithmetic Progression Sum
+    // 4. Arithmetic Progression Sum
     public static String arithmeticProgression(int firstTerm, int commonDifference, int numberOfTerms) {
         int lastTerm = firstTerm + (numberOfTerms - 1) * commonDifference;
         int sum = (numberOfTerms * (firstTerm + lastTerm)) / 2;
@@ -545,7 +619,7 @@ public class Project {
         return points;
     }
 
-    // Geometric Progression Sum
+    // 5. Geometric Progression Sum
     public static String geometricProgression(int firstTerm, int commonRatio, int numberOfTerms) {
         double sum = firstTerm * (1 - Math.pow(commonRatio, numberOfTerms)) / (1 - commonRatio);
         return Integer.toString((int)sum);
@@ -563,44 +637,27 @@ public class Project {
         return points;
     }
 
-    // Armstrong Number
-    public static String isArmstrong(int num, int power){
-        int originalNum = num;
-        int sum = 0;
-        while (num > 0 ){
-            int digit = num % 10;
-            sum += Math.pow(digit, power);
-            num /= 10;
-        }
-        if (originalNum == sum){
-            return Boolean.toString(true);
-        }
-        return Boolean.toString(false);
+    // 7. Banking
+    public static String banking(double amount, double rate, int year) {
+        double result = amount * Math.pow(1 + rate / 100, year);
+        double roundedResult = Math.round(result * 100.0) / 100.0; 
+        return Double.toString(roundedResult);
     }
 
-    public static int isArmstrongQuestion(int points, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
-        userAttempts = 0;
+    public static int bankingQuestion(int points, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
         Scanner input = new Scanner(System.in);
-        int num = randNumbers(99989) + 10;
-        int power = 0;
-        if (num >= 10000){
-            power = 5;
-        } else if (num >= 1000){
-            power = 4;
-        } else if (num >= 100){
-            power = 3;
-        } else if (num >= 10){
-            power = 2;
-        }
-        System.out.print("Is this number " + num + " an Armstrong number? (True for Yes and False for No)" + "\nYour answer: ");
-        String userInput = input.nextLine().trim().toLowerCase();
-        String result = isArmstrong(num, power);
+        double amount = randNumbers(10000.0);
+        double rate = randNumbers(10.0);
+        int year = randNumbers(50);
+        System.out.print("If you deposit $" + amount + " in your bank account with an interest of " + rate + "%\nHow much money will you earn in " + year + " year(s)? (round to 2 decimal places)\nYour answer: ");
+        String userInput = input.nextLine().trim();
+        String result = banking(amount, rate, year);
         points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
         return points;
     }
 
     // HARD QUESTION METHODS
-    // Base Conversion
+    // 1. Base Conversion
     public static String baseConversion(int num, int base){
         String str = "";
         while (num > 0){
@@ -642,7 +699,7 @@ public class Project {
         return points;
     }
 
-    // Roman Numeral Conversion
+    // 2. Roman Numeral Conversion
     public static String romanConversion(int num) {
         String[][] symbolList = {
             {"M", "1000"},
@@ -681,7 +738,7 @@ public class Project {
         return points;
     }
 
-    // Standard Deviation
+    // 3. Standard Deviation
     public static double mean(double[] numList){
         double total = 0.0;
         for (int i = 0; i < numList.length; i++){
@@ -712,7 +769,7 @@ public class Project {
         return points;
     }
 
-    // Highest Sum 
+    // 4. Highest Sum 
     public static String highestSum(int[][] nestedList){
         int max = 0;
         for (int i = 0 ; i < nestedList.length; i++){
@@ -728,7 +785,7 @@ public class Project {
     public static int highestSumQuestion(int points, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
         Scanner input = new Scanner(System.in);
         int length = randNumbers(4) + 10;
-        int[][] nestedNumList = nestedListGenerator(length, 999);
+        int[][] nestedNumList = nestedListGenerator(length, 500);
         for (int i = 0; i < nestedNumList.length; i++){
             for (int j = 0 ; j < nestedNumList.length; j++){
                 System.out.printf("%-6d", nestedNumList[i][j]);
