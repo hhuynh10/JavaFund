@@ -60,7 +60,7 @@ public class Project {
             do {
                 userAttempts = 2;
                 // randomQuestions = (int)(Math.random() * 5);
-                randomQuestions = 8;
+                randomQuestions = 5;
                 System.out.print("Would you like to choose easy, medium or hard question?\n" + "(E)asy, (M)edium, or (H)ard? ");
                 userAns = input.nextLine().toLowerCase();
 
@@ -96,9 +96,6 @@ public class Project {
                         case 7:
                         userPoints = perimeterQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, EASY);
                         break;
-                        case 8:
-                        userPoints = volumeQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, EASY);
-                        break;
                     }
                 } else if (userAns.length() > 0 && userAns.charAt(0) == 'm') {
                     switch(randomQuestions){
@@ -115,7 +112,13 @@ public class Project {
                         userPoints = arithmeticProgressionQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, MEDIUM);
                         break;
                         case 4:
+                        userPoints = geometricProgressionQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, MEDIUM);
+                        break;
+                        case 5:
                         userPoints = bankingQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, MEDIUM);
+                        break;
+                        case 6:
+                        userPoints = volumeQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, MEDIUM);
                         break;
                     }
                 } else if (userAns.length() > 0 && userAns.charAt(0) == 'h') {
@@ -132,9 +135,7 @@ public class Project {
                         case 3:
                         userPoints = highestSumQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, HARD);
                         break;
-                        case 4:
-                        userPoints = geometricProgressionQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, HARD);
-                        break;
+                        
                     }
                 }
             } while (0 < userPoints && userPoints < 150);
@@ -236,28 +237,26 @@ public class Project {
     }
 
     public static int secretQuestion(int points, String[] congratsMessages) {
-        if (Math.random() <= 0.1 && points < 150) {
-            Scanner input = new Scanner(System.in);
-            System.out.println("YOU GOT A SECRET QUESTION!!!\n(if answer correctly +50 points, otherwise -50 points)");
+        Scanner input = new Scanner(System.in);
+        System.out.println("YOU GOT A SECRET QUESTION!!!\n(if answer correctly +50 points, otherwise -50 points)");
+        System.out.print("Would you like to risk? (Y)es or (N)o? ");
+        String userInput = input.nextLine().toLowerCase();
+        while (userInput.charAt(0) != 'y' && userInput.charAt(0) != 'n') {
             System.out.print("Would you like to risk? (Y)es or (N)o? ");
-            String userInput = input.nextLine().toLowerCase();
-            while (userInput.charAt(0) != 'y' && userInput.charAt(0) != 'n') {
-                System.out.print("Would you like to risk? (Y)es or (N)o? ");
-                userInput = input.nextLine().toLowerCase();
-            }
-            if (userInput.equals("y")) {
-                int randNum = (int)(Math.random() * 10);
-                System.out.print("Guess a random number from 0 - 9: ");
-                userInput = input.nextLine().trim();
-                if (userInput.equals(Integer.toString(randNum))) {
-                    printMessages(congratsMessages);
-                    points += 50;
-                    System.out.println("Your current points: " + points);
-                } else {
-                    System.out.println("Your answer is incorrect. The answer is: " + randNum);
-                    points -= 50;
-                    System.out.println("Your current points: " + points);
-                }
+            userInput = input.nextLine().toLowerCase();
+        }
+        if (userInput.equals("y")) {
+            int randNum = (int)(Math.random() * 10);
+            System.out.print("Guess a random number from 0 - 9: ");
+            userInput = input.nextLine().trim();
+            if (userInput.equals(Integer.toString(randNum))) {
+                printMessages(congratsMessages);
+                points += 50;
+                System.out.println("Your current points: " + points);
+            } else {
+                System.out.println("Your answer is incorrect. The answer is: " + randNum);
+                points -= 50;
+                System.out.println("Your current points: " + points);
             }
         }
         return points;
@@ -275,12 +274,14 @@ public class Project {
                     printMessages(congratsMessages);
                     points += difficulty;
                     System.out.println("Your current points: " + points);
-                    points = secretQuestion(points, congratsMessages);
+                    if (Math.random() <= 0.1 && points < 150){
+                        points = secretQuestion(points, congratsMessages);
+                    }
                 }
                 userAttempts--;
             }
             if (userAttempts == 0 && !userInput.equals(result)) {
-                System.out.println("Your answer is incorrect. The answer is: " + result);
+                System.out.println("Your answer is incorrect! The answer is: " + result);
                 points -= difficulty;
                 System.out.println("Your current points: " + points);
             }
@@ -288,7 +289,9 @@ public class Project {
             printMessages(congratsMessages);
             points += difficulty;
             System.out.println("Your current points: " + points);
-            points = secretQuestion(points, congratsMessages);
+            if (Math.random() <= 0.1 && points < 150){
+                points = secretQuestion(points, congratsMessages);
+            }
         }
         return points;
     }
@@ -568,47 +571,11 @@ public class Project {
                 result = perimeterRectangular(length, width);
                 break;
             }
-            String userInput = input.nextLine().trim();
-            points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
-            return points;
-        }
-
-        // 9. Volume of different figures
-        public static String volumeCone(double radius, double height){
-            double result = (Math.round(Math.PI * 100.0) / 100.0) * (radius * radius) * (height / 3);
-            double roundedResult = Math.round (result * 10.0) / 10.0;
-            return Double. toString (roundedResult);
-        }
-
-        public static String volumePyramid(double length, double width, double height){
-            double result = (length * width * height) / 3;
-            double roundedResult = Math.round (result * 10.0) / 10.0;
-            return Double. toString (roundedResult);
-        }
-
-        public static int volumeQuestion (int points, int userAttempts, String [] congratsMessages, String [] motivationMessages, int difficulty){
-            Scanner input = new Scanner (System.in);
-            int randNum = (int)(Math.random() * 2);
-            String result = "";
-                switch(randNum){
-                    case 0: 
-                    double radius = randNumbers(20.0);
-                    double height = randNumbers(20.0);
-                    System.out.print("Find the Volume of this Cone figure (round to 1 decimal places)\n" + "PI: 3.14, Radius: " + radius + " and Height: " + height + "\nYour answer: ");
-                    result = volumeCone(radius, height);
-                    break;
-                    case 1: 
-                    double length = randNumbers(20.0);
-                    double width = randNumbers(20.0);
-                    double height1 = randNumbers(20.0);
-                    System.out.print("Find the Volume of this Pyramid figure (round to 1 decimal places)\n" + "Length: " + length + " width: " + width + ", and Height: " + height1 +"\nYour answer: ");
-                    result = volumePyramid(length, width, height1);
-                    break;
-                }
-                String userInput = input.nextLine().trim();
-                points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
-                return points;
-            }
+        String userInput = input.nextLine().trim();
+        points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
+        return points;
+    }
+    
 
     // MEDIUM QUESTION METHODS
     // 1. Greatest Common Divisor
@@ -714,7 +681,7 @@ public class Project {
         return points;
     }
 
-    // 7. Banking
+    // 6. Banking
     public static String banking(double amount, double rate, int year) {
         double result = amount * Math.pow(1 + rate / 100, year);
         double roundedResult = Math.round(result * 100.0) / 100.0; 
@@ -729,6 +696,43 @@ public class Project {
         System.out.print("If you deposit $" + amount + " in your bank account with an interest of " + rate + "%\nHow much money will you earn in " + year + " year(s)? (round to 2 decimal places)\nYour answer: ");
         String userInput = input.nextLine().trim();
         String result = banking(amount, rate, year);
+        points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
+        return points;
+    }
+
+    // 7. Volume of different figures
+    public static String volumeCone(double radius, double height){
+        double result = (Math.round(Math.PI * 100.0) / 100.0) * (radius * radius) * (height / 3);
+        double roundedResult = Math.round (result * 10.0) / 10.0;
+        return Double. toString (roundedResult);
+    }
+
+    public static String volumePyramid(double length, double width, double height){
+        double result = (length * width * height) / 3;
+        double roundedResult = Math.round (result * 10.0) / 10.0;
+        return Double. toString (roundedResult);
+    }
+
+    public static int volumeQuestion (int points, int userAttempts, String [] congratsMessages, String [] motivationMessages, int difficulty){
+        Scanner input = new Scanner (System.in);
+        int randNum = (int)(Math.random() * 2);
+        String result = "";
+            switch(randNum){
+                case 0: 
+                double radius = randNumbers(20.0);
+                double height = randNumbers(20.0);
+                System.out.print("Find the Volume of this Cone figure (round to 1 decimal places)\n" + "PI: 3.14, Radius: " + radius + " and Height: " + height + "\nYour answer: ");
+                result = volumeCone(radius, height);
+                break;
+                case 1: 
+                double length = randNumbers(20.0);
+                double width = randNumbers(20.0);
+                double height1 = randNumbers(20.0);
+                System.out.print("Find the Volume of this Pyramid figure (round to 1 decimal places)\n" + "Length: " + length + " width: " + width + ", and Height: " + height1 +"\nYour answer: ");
+                result = volumePyramid(length, width, height1);
+                break;
+            }
+        String userInput = input.nextLine().trim();
         points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
         return points;
     }
