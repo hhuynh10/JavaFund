@@ -60,7 +60,7 @@ public class Project {
             do {
                 userAttempts = 2;
                 // randomQuestions = (int)(Math.random() * 5);
-                randomQuestions = 6;
+                randomQuestions = 8;
                 System.out.print("Would you like to choose easy, medium or hard question?\n" + "(E)asy, (M)edium, or (H)ard? ");
                 userAns = input.nextLine().toLowerCase();
 
@@ -92,6 +92,12 @@ public class Project {
                         break;
                         case 6:
                         userPoints = areaQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, EASY);
+                        break;
+                        case 7:
+                        userPoints = perimeterQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, EASY);
+                        break;
+                        case 8:
+                        userPoints = volumeQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, EASY);
                         break;
                     }
                 } else if (userAns.length() > 0 && userAns.charAt(0) == 'm') {
@@ -482,13 +488,13 @@ public class Project {
     }
 
     public static String circleArea(double radius) {
-        double result = Math.PI * Math.pow(radius, 2);
+        double result = (Math.round(Math.PI * 100.0) / 100.0) * Math.pow(radius, 2);
         double roundedResult = Math.round(result * 10.0) / 10.0;
         return Double.toString(roundedResult);
     }
 
     public static String cylinderArea(double radius, double height) {
-        double result = 2 * Math.PI * radius * (radius + height);
+        double result = 2 * (Math.round(Math.PI * 100.0) / 100.0) * radius * (radius + height);
         double roundedResult = Math.round(result * 10.0) / 10.0;
         return Double.toString(roundedResult);
     }
@@ -517,13 +523,13 @@ public class Project {
             break;
             case 3: 
             double radius = randNumbers(20.0);
-            System.out.print("Find the area of this Circle figure (round to 1 decimal places)\n" + "Radius: " + radius + "\nYour answer: ");
+            System.out.print("Find the area of this Circle figure (round to 1 decimal places)\n" + "PI: 3.14, Radius: " + radius + "\nYour answer: ");
             result = circleArea(radius);
             break;
             case 4: 
             double radius1 = randNumbers(20.0);
             double height1 = randNumbers(20.0);
-            System.out.print("Find the area of this Cylinder figure (round to 1 decimal places)\n" + "Radius: " + radius1 + " and Height: " + height1 + "\nYour answer: ");
+            System.out.print("Find the area of this Cylinder figure (round to 1 decimal places)\n" + "PI: 3.14, Radius: " + radius1 + " and Height: " + height1 + "\nYour answer: ");
             result = cylinderArea(radius1, height1);
             break;
         }
@@ -532,6 +538,77 @@ public class Project {
         return points;
     }
 
+    // 8. Perimeter of different figures
+    public static String perimeterSquare (double side){
+        double result = 4 * side;
+        double roundedResult = Math.round(result * 10.0) / 10.0;
+        return Double.toString (roundedResult);
+    }
+
+    public static String perimeterRectangular (double length, double width){
+        double perimeterRectangular = 2 * (length + width);
+        double roundedResult = Math.round (perimeterRectangular * 10.0) / 10.0;
+        return Double. toString (roundedResult);
+    }
+
+    public static int perimeterQuestion (int points, int userAttempts, String [] congratsMessages, String [] motivationMessages, int difficulty){
+        Scanner input = new Scanner (System.in);
+        int randNum = (int)(Math.random() * 2);
+        String result = "";
+            switch(randNum){
+                case 0: 
+                double side = randNumbers(20.0);
+                System.out.print("Find the perimeter of this Square figure (round to 1 decimal places)\n" + "Side: " + side + "\nYour answer: ");
+                result = perimeterSquare(side);
+                break;
+                case 1: 
+                double length = randNumbers(20.0);
+                double width = randNumbers(20.0);
+                System.out.print("Find the perimeter of this Rectangular figure (round to 1 decimal places)\n" + "Length: " + length + " and width: " + width + "\nYour answer: ");
+                result = perimeterRectangular(length, width);
+                break;
+            }
+            String userInput = input.nextLine().trim();
+            points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
+            return points;
+        }
+
+        // 9. Volume of different figures
+        public static String volumeCone(double radius, double height){
+            double result = (Math.round(Math.PI * 100.0) / 100.0) * (radius * radius) * (height / 3);
+            double roundedResult = Math.round (result * 10.0) / 10.0;
+            return Double. toString (roundedResult);
+        }
+
+        public static String volumePyramid(double length, double width, double height){
+            double result = (length * width * height) / 3;
+            double roundedResult = Math.round (result * 10.0) / 10.0;
+            return Double. toString (roundedResult);
+        }
+
+        public static int volumeQuestion (int points, int userAttempts, String [] congratsMessages, String [] motivationMessages, int difficulty){
+            Scanner input = new Scanner (System.in);
+            int randNum = (int)(Math.random() * 2);
+            String result = "";
+                switch(randNum){
+                    case 0: 
+                    double radius = randNumbers(20.0);
+                    double height = randNumbers(20.0);
+                    System.out.print("Find the Volume of this Cone figure (round to 1 decimal places)\n" + "PI: 3.14, Radius: " + radius + " and Height: " + height + "\nYour answer: ");
+                    result = volumeCone(radius, height);
+                    break;
+                    case 1: 
+                    double length = randNumbers(20.0);
+                    double width = randNumbers(20.0);
+                    double height1 = randNumbers(20.0);
+                    System.out.print("Find the Volume of this Pyramid figure (round to 1 decimal places)\n" + "Length: " + length + " width: " + width + ", and Height: " + height1 +"\nYour answer: ");
+                    result = volumePyramid(length, width, height1);
+                    break;
+                }
+                String userInput = input.nextLine().trim();
+                points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
+                return points;
+            }
 
     // MEDIUM QUESTION METHODS
     // 1. Greatest Common Divisor
