@@ -60,7 +60,7 @@ public class Project {
             do {
                 userAttempts = 2;
                 // randomQuestions = (int)(Math.random() * 5);
-                randomQuestions = 4;
+                randomQuestions = 9;
                 System.out.print("Would you like to choose easy, medium or hard question?\n" + "(E)asy, (M)edium, or (H)ard? ");
                 userAns = input.nextLine().toLowerCase();
 
@@ -95,6 +95,12 @@ public class Project {
                         break;
                         case 7:
                         userPoints = perimeterQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, EASY);
+                        break;
+                        case 8:
+                        userPoints = uppercaseLettersQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, EASY);
+                        break;
+                        case 9:
+                        userPoints = currencyExchangeQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, EASY);
                         break;
                     }
                 } else if (userAns.length() > 0 && userAns.charAt(0) == 'm') {
@@ -604,6 +610,49 @@ public class Project {
         return points;
     }
     
+    // 9. Uppercase letters
+    public static String uppercaseLetters(int counts){
+        BigInteger result = BigInteger.ONE;
+        for (int i = 1, j = 26; i <= counts; i++, j--){
+            result = result.multiply(BigInteger.valueOf(j));
+        }
+        return result.toString();
+    }
+
+    public static int uppercaseLettersQuestion(int points, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
+        Scanner input = new Scanner(System.in);
+        int counts = randNumbers(10);
+        System.out.print("There are 26 letters in the English alphabet.\nHow many strings are there consisting of exactly " + counts + " different uppercase letters (repeated letters are not allowed)? \nYour answer: ");
+        String userInput = input.nextLine().trim();
+        String result = uppercaseLetters(counts);
+        points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
+        return points;
+    }
+
+    // 10. Currency Exchange
+    public static String currencyExchange(int quarters, int dimes, int nickels, int pennies){
+        double result = (quarters * 25.0 + dimes * 10.0 + nickels * 5.0 + pennies) / 100;
+        double roundedResult = Math.round(result * 100.0) / 100.0;
+        return Double.toString(roundedResult);
+    }
+
+    public static int currencyExchangeQuestion(int points, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
+        Scanner input = new Scanner(System.in);
+        int quarters = randNumbers(50);
+        int dimes = randNumbers(50);
+        int nickels = randNumbers(50);
+        int pennies = randNumbers(50);
+        System.out.println("Convert theses into dollar(s)");
+        System.out.println("Quarters: " + quarters);
+        System.out.println("Dimes: " + dimes);
+        System.out.println("Nickels: " + nickels);
+        System.out.println("Pennies: " + pennies);
+        System.out.print("Your answer: ");
+        String userInput = input.nextLine().trim();
+        String result = currencyExchange(quarters, dimes, nickels, pennies);
+        points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
+        return points;
+    }
 
     // MEDIUM QUESTION METHODS
     // 1. Greatest Common Divisor

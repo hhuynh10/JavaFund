@@ -1,8 +1,4 @@
-package lab;
-import java.util.Arrays;
 import java.util.Scanner;
-
-import javax.net.ssl.SNIHostName;
 
 public class Lab {
     public static void main(String[] args){
