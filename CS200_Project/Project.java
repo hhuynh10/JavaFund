@@ -60,7 +60,7 @@ public class Project {
             do {
                 userAttempts = 2;
                 // randomQuestions = (int)(Math.random() * 5);
-                randomQuestions = 7;
+                randomQuestions = 4;
                 System.out.print("Would you like to choose easy, medium or hard question?\n" + "(E)asy, (M)edium, or (H)ard? ");
                 userAns = input.nextLine().toLowerCase();
 
@@ -134,6 +134,9 @@ public class Project {
                         break;
                         case 3:
                         userPoints = highestSumQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, HARD);
+                        break;
+                        case 4:
+                        userPoints = passwordCountQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, HARD);
                         break;
                         
                     }
@@ -912,6 +915,27 @@ public class Project {
         System.out.print("From the nested array above, find the row with the highest sum then return that sum. \nYour answer: ");
         String userInput = input.nextLine().trim();
         String result = highestSum(nestedNumList);
+        points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
+        return points;
+    }
+
+    // 5. Password Counts
+    public static String passwordCount(int min, int max) {
+        BigInteger result = BigInteger.ZERO;
+        for (int i = min; i <= max; i++) {
+            result = result.add(BigInteger.valueOf((long)Math.pow(68, i)));
+        }
+        return result.toString();
+    }
+
+    public static int passwordCountQuestion(int points, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
+        Scanner input = new Scanner(System.in);
+        int min = randNumbers(4) + 3;
+        int max = randNumbers(8) + 4;
+        System.out.println("Suppose that a password for a computer system must have at least " + min + ", but no more than " + max + " characters, where each character in the password is a lowercase English letter, an uppercase English letter, a digit, or one of the six special characters *, >, <, !, +, and =");
+        System.out.print("How many different passwords are available for this computer system?\nYour answer: ");
+        String userInput = input.nextLine().trim();
+        String result = passwordCount(min , max);
         points = compareResult(points, userInput, result, userAttempts, congratsMessages, motivationMessages, difficulty);
         return points;
     }
