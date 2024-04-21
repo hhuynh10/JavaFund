@@ -10,10 +10,6 @@ public class Test {
         
     }
 
-    public static String currencyExchange(int quarters, int dimes, int nickels, int pennies){
-        double result = (quarters * 25.0 + dimes * 10.0 + nickels * 5.0 + pennies) / 100;
-        double roundedResult = Math.round(result * 100.0) / 100.0;
-        return Double.toString(roundedResult);
-    }
+    
 }
 

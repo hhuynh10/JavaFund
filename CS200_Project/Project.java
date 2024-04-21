@@ -317,7 +317,7 @@ public class Project {
             total *= i;
         }
         return Integer.toString(total);
-    }    
+    }
 
     public static int factorialQuestion(int points, int userAttempts, String[] congratsMessages, String[] motivationMessages, int difficulty) {
         Scanner input = new Scanner(System.in);
