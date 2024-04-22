@@ -69,7 +69,6 @@ public class Project {
                     System.out.print("Would you like to choose easy, medium or hard question?\n" + "(E)asy, (M)edium, or (H)ard? ");
                     userAns = input.nextLine().toLowerCase();
                 }
-
                 if (userAns.length() > 0 && userAns.charAt(0) == 'e') {
                     switch(randomQuestions){
                         case 0:
