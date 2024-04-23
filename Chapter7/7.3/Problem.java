@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Problem {
@@ -14,6 +15,8 @@ public class Problem {
                 occurrences[userInput]++;
             }
         } while (userInput != 0);
+
+        System.out.println(Arrays.toString(occurrences));
 
         for (int i = 0; i < occurrences.length; i++){
             if (occurrences[i] > 0) {
