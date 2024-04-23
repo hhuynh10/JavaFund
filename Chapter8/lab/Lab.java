@@ -21,6 +21,9 @@ public class Lab {
     }
 
     public static float avgCalculation(int[] list, int count){
+        if (count == 0){
+            return 0;
+        }
         float avg;
         float sum = 0;
         for (int i = 0; i < count; i++){
@@ -31,6 +34,9 @@ public class Lab {
     }
 
     public static int sumEven(int[] list, int count){
+        if (count == 0){
+            return 0;
+        }
         int sum = 0;
         for (int i = 0; i < count; i++){
             if (list[i] % 2 == 0){
@@ -41,6 +47,9 @@ public class Lab {
     }
 
     public static int findMax(int[] list, int count){
+        if (count == 0){
+            return 0;
+        }
         int max = 0;
         for (int i = 0; i < count; i++){
             max = Math.max(max, list[i]);
