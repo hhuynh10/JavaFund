@@ -59,8 +59,8 @@ public class Project {
             userPoints = 50;
             do {
                 userAttempts = 2;
-                // randomQuestions = (int)(Math.random() * 5);
-                randomQuestions = 9;
+                randomQuestions = (int)(Math.random() * 5);
+                //randomQuestions = 9;
                 System.out.print("Would you like to choose easy, medium or hard question?\n" + "(E)asy, (M)edium, or (H)ard? ");
                 userAns = input.nextLine().toLowerCase();
 
@@ -70,81 +70,11 @@ public class Project {
                     userAns = input.nextLine().toLowerCase();
                 }
                 if (userAns.length() > 0 && userAns.charAt(0) == 'e') {
-                    switch(randomQuestions){
-                        case 0:
-                        userPoints = factorialQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, EASY);
-                        break;
-                        case 1:
-                        userPoints = averageQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, EASY);
-                        break;
-                        case 2:
-                        userPoints = isPrimeQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, EASY);
-                        break;
-                        case 3:
-                        userPoints = tempConversionQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, EASY);
-                        break;
-                        case 4:
-                        userPoints = isArmstrongQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, EASY);
-                        break;
-                        case 5:
-                        userPoints = findNumQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, EASY);
-                        break;
-                        case 6:
-                        userPoints = areaQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, EASY);
-                        break;
-                        case 7:
-                        userPoints = perimeterQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, EASY);
-                        break;
-                        case 8:
-                        userPoints = uppercaseLettersQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, EASY);
-                        break;
-                        case 9:
-                        userPoints = currencyExchangeQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, EASY);
-                        break;
-                    }
+                    userPoints = easy(randomQuestions, userPoints, userAttempts, congratsMessages, motivationalMessages, EASY);
                 } else if (userAns.length() > 0 && userAns.charAt(0) == 'm') {
-                    switch(randomQuestions){
-                        case 0:
-                        userPoints = gcdQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, MEDIUM);
-                        break;
-                        case 1:
-                        userPoints = lcmQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, MEDIUM);
-                        break;
-                        case 2:
-                        userPoints = binomialCoefficientQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, MEDIUM);
-                        break;
-                        case 3:
-                        userPoints = arithmeticProgressionQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, MEDIUM);
-                        break;
-                        case 4:
-                        userPoints = geometricProgressionQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, MEDIUM);
-                        break;
-                        case 5:
-                        userPoints = bankingQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, MEDIUM);
-                        break;
-                        case 6:
-                        userPoints = volumeQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, MEDIUM);
-                        break;
-                    }
+                    userPoints = medium(randomQuestions, userPoints, userAttempts, congratsMessages, motivationalMessages, MEDIUM);
                 } else if (userAns.length() > 0 && userAns.charAt(0) == 'h') {
-                    switch(randomQuestions){
-                        case 0:
-                        userPoints = baseConversionQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, HARD);
-                        break;
-                        case 1:
-                        userPoints = romanConversionQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, HARD);
-                        break;
-                        case 2:
-                        userPoints = standardDeviationQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, HARD);
-                        break;
-                        case 3:
-                        userPoints = highestSumQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, HARD);
-                        break;
-                        case 4:
-                        userPoints = passwordCountQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, HARD);
-                        break;
-                        
-                    }
+                    userPoints = hard(randomQuestions, userPoints, userAttempts, congratsMessages, motivationalMessages, HARD);
                 }
             } while (0 < userPoints && userPoints < 150);
             
@@ -302,6 +232,90 @@ public class Project {
             }
         }
         return points;
+    }
+
+    public static int easy(int randomQuestions, int userPoints, int userAttempts, String[] congratsMessages, String[] motivationalMessages, int EASY){
+        switch(randomQuestions){
+            case 0:
+            userPoints = factorialQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, EASY);
+            break;
+            case 1:
+            userPoints = averageQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, EASY);
+            break;
+            case 2:
+            userPoints = isPrimeQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, EASY);
+            break;
+            case 3:
+            userPoints = tempConversionQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, EASY);
+            break;
+            case 4:
+            userPoints = isArmstrongQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, EASY);
+            break;
+            case 5:
+            userPoints = findNumQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, EASY);
+            break;
+            case 6:
+            userPoints = areaQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, EASY);
+            break;
+            case 7:
+            userPoints = perimeterQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, EASY);
+            break;
+            case 8:
+            userPoints = uppercaseLettersQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, EASY);
+            break;
+            case 9:
+            userPoints = currencyExchangeQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, EASY);
+            break;
+        }
+        return userPoints;
+    }
+
+    public static int medium(int randomQuestions, int userPoints, int userAttempts, String[] congratsMessages, String[] motivationalMessages, int MEDIUM){
+        switch(randomQuestions){
+            case 0:
+            userPoints = gcdQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, MEDIUM);
+            break;
+            case 1:
+            userPoints = lcmQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, MEDIUM);
+            break;
+            case 2:
+            userPoints = binomialCoefficientQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, MEDIUM);
+            break;
+            case 3:
+            userPoints = arithmeticProgressionQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, MEDIUM);
+            break;
+            case 4:
+            userPoints = geometricProgressionQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, MEDIUM);
+            break;
+            case 5:
+            userPoints = bankingQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, MEDIUM);
+            break;
+            case 6:
+            userPoints = volumeQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, MEDIUM);
+            break;
+        }
+        return userPoints;
+    }
+
+    public static int hard(int randomQuestions, int userPoints, int userAttempts, String[] congratsMessages, String[] motivationalMessages, int HARD){
+        switch(randomQuestions){
+            case 0:
+            userPoints = baseConversionQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, HARD);
+            break;
+            case 1:
+            userPoints = romanConversionQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, HARD);
+            break;
+            case 2:
+            userPoints = standardDeviationQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, HARD);
+            break;
+            case 3:
+            userPoints = highestSumQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, HARD);
+            break;
+            case 4:
+            userPoints = passwordCountQuestion(userPoints, userAttempts, congratsMessages, motivationalMessages, HARD);
+            break;
+        }
+        return userPoints;
     }
 
 

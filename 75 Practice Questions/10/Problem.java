@@ -4,6 +4,7 @@ public class Problem {
         System.out.println(indexOfFirstPair(arr));
     }
 
+    int count = 0;
     public static int indexOfFirstPair(int[] myArray) {
         for (int i = 0; i < myArray.length - 1; i++) {
             if (myArray[i] == myArray[i + 1]) {
