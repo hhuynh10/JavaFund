@@ -318,7 +318,7 @@ public class Project {
         return userPoints;
     }
 
-
+    
     // MATHEMATICAL METHODS
     // EASY QUESTION METHODS
     // 1. Factorial
