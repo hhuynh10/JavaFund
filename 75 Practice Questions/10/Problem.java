@@ -4,16 +4,14 @@ public class Problem {
         System.out.println(indexOfFirstPair(arr));
     }
 
-    int count = 0;
     public static int indexOfFirstPair(int[] myArray) {
         for (int i = 0; i < myArray.length - 1; i++) {
             if (myArray[i] == myArray[i + 1]) {
-                if (i == 0 || myArray[i] != myArray[i - 1]) {
+                if ((i == 0 || myArray[i - 1] != myArray[i]) && (i + 2 >= myArray.length || myArray[i + 2] != myArray[i])) {
                     return i;
                 }
             }
         }
-    
+        return -1;
     }
-    
 }
