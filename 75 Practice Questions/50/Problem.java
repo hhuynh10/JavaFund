@@ -8,8 +8,8 @@ public class Problem {
     public static int[] backAgain(int n){
         int[] arr = new int[2 * n - 1];
         for (int i = 1; i <= arr.length; i++){
-            if (i > n){
-                arr[i-1] = n-1;
+            if (i >= n){
+                arr[i-1] = n;
                 n--;
             } else {
                 arr[i-1] = i;
