@@ -3,7 +3,5 @@ public class Problem {
         
     }
 
-    public static int[][] switchColumns(int[][] a, int x, int y) {
-        
-    }
+    
 }
