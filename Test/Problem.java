@@ -11,20 +11,31 @@ public class Problem {
         System.out.println(isAnagram(s3, s4));
     }
 
-    public static boolean isAnagram(String s, String t) {
-        int[] sCount = new int[26];
-        int[] tCount = new int[26];
-
-        for (char c : s.toCharArray()){
-            sCount[c - 'a']++;
+    public static boolean isPalindrome(String s) {
+        int l = 0;
+        int r = s.length()-1;
+        
+        while (l < r){
+            while (l < r && !isValid(s.charAt(l))){
+                l++;
+                continue;
+            }
+            while (l < r && !isValid(s.charAt(r))){
+                r--;
+                continue;
+            }
+            if (s.charAt(l) != s.charAt(r)){
+                return false;
+            }
+            l++;
+            r--;
         }
-        for (char c : t.toCharArray()){
-            tCount[c - 'a']++;
-        }
-
-        if (Arrays.equals(sCount, tCount)){
-            return true;
-        }
-        return false;
+        return true;
+    }
+    
+    public static boolean isValid(char c){
+        return 'a' <= c && c <= 'z' ||
+                'A' <= c && c <= 'Z' ||
+                '0' <= c && c <= '9';
     }
 }
