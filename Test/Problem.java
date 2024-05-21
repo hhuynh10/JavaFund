@@ -3,7 +3,7 @@ import java.util.Arrays;
 public class Problem {
     public static void main(String[] args) {
         String s1 = "anagram";
-        String s2 = "nagaram";
+        String s2 = "nagdfgfaram";
         String s3 = "rat";
         String s4 = "car";
 
