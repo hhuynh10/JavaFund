@@ -2,7 +2,7 @@ import java.util.Arrays;
 
 public class Problem {
     public static void main(String[] args) {
-        double[] x = {0.69, 0.73, 0.76, 0.77, 0.20};
+        double[] x = {0.69, 0.73, 0.76, 0.77, 0.20, 0.31};
         double[] y = {0.25, 0.83, 0.88, 0.08, 0.88};
 
         System.out.println(Arrays.deepToString(product(x, y)));
