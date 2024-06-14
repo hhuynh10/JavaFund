@@ -9,7 +9,7 @@ public class Problem {
             System.out.println(p.data);
         }
 
-        System.out.println(size(start)); // Pass 'start' instead of 'p' to size method
+        System.out.println(size(start));
     }
 
     public static int size(Node list) {
