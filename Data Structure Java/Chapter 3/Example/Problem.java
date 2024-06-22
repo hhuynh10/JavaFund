@@ -49,7 +49,7 @@ public class Problem {
                 break;
             }
         }
-        
+        System.out.println();
         return start;
     }
 }
