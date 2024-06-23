@@ -9,8 +9,6 @@ public class Problem {
         for (p = start; p != null; p = p.next){
             System.out.print(p.data + " ");
             }
-        System.out.println();
-
         System.out.println(sum(start));
     }
 
