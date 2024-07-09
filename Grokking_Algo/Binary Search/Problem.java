@@ -17,7 +17,6 @@ public class Problem {
                 return mid;
             }
         }
-        System.out.println();
         return -1;
     }
 }
