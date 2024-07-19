@@ -2,40 +2,37 @@ import java.util.Arrays;
 
 public class Problem {
     public static void main(String[] args) {
-        String s1 = "anagram";
-        String s2 = "nagdfgfaram";
-        String s3 = "rat";
-        String s4 = "car";
-
-        System.out.println(isAnagram(s1, s2));
-        System.out.println(isAnagram(s3, s4));
+        int[] arr = {1, 2, 3, 4, 6, 7};
+        System.out.println(Arrays.toString(insert(arr, 4, 5)));
     }
 
-    public static boolean isPalindrome(String s) {
-        int l = 0;
-        int r = s.length()-1;
-        
-        while (l < r){
-            while (l < r && !isValid(s.charAt(l))){
-                l++;
-                continue;
-            }
-            while (l < r && !isValid(s.charAt(r))){
-                r--;
-                continue;
-            }
-            if (s.charAt(l) != s.charAt(r)){
-                return false;
-            }
-            l++;
-            r--;
+    public static int[] insert(int[] arr, int index, int value){
+        int[] res = new int[arr.length+1];
+        int j = 0;
+        for (int i = 0; i < arr.length; i++){
+            if (j == index){
+                res[j] = value;
+                j++;
+            } 
+            res[j] = arr[i];
+            j++;
         }
-        return true;
+        return res;
     }
-    
-    public static boolean isValid(char c){
-        return 'a' <= c && c <= 'z' ||
-                'A' <= c && c <= 'Z' ||
-                '0' <= c && c <= '9';
+
+    public static int[] insert2(int[] arr, int index, int value) {
+        // Create a new array with one more element than the original array
+        int[] res = new int[arr.length + 1];
+
+        // Copy the elements before the insertion point
+        System.arraycopy(arr, 0, res, 0, index);
+
+        // Insert the new value
+        res[index] = value;
+
+        // Copy the elements after the insertion point
+        System.arraycopy(arr, index, res, index + 1, arr.length - index);
+
+        return res;
     }
 }
