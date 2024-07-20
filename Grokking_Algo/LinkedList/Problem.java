@@ -37,6 +37,9 @@ public class Problem {
         linkedList2.addLast("G");
         System.out.println(linkedList2);
 
+        System.out.println(linkedList2.peekFirst());
+        System.out.println(linkedList2.peekLast());
+
         String first = linkedList2.removeFirst();
         String last = linkedList2.removeLast();
         System.out.println(first + " " + last);
