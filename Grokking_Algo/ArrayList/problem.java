@@ -30,5 +30,6 @@ public class problem {
         System.out.println(subList);
         
         arrayList.clear();
+        System.out.println();
     }
 }
