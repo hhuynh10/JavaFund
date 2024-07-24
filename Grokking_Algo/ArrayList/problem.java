@@ -28,8 +28,7 @@ public class problem {
 
         List<String> subList = arrayList.subList(1, arrayList.size()-1);
         System.out.println(subList);
-        
-        arrayList.clear();
         System.out.println();
+        arrayList.clear();
     }
 }
