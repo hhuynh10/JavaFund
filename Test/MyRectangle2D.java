@@ -2,34 +2,33 @@ public class MyRectangle2D {
     private double height;
     private double width;
 
-    public MyRectangle2D() {
-        this.height = 0.0;
-        this.width = 0.0;
+    public MyRectangle2D(){
+        height = 0.0;
+        width = 0.0;
     }
 
-    public MyRectangle2D(double height, double width) {
+    public MyRectangle2D(double height, double width){
         this.height = height;
         this.width = width;
     }
 
-    public double getHeight() {
+    public double getHeight(){
         return height;
     }
 
-    public void setHeight(double height) {
+    public void setHeight(double height){
         this.height = height;
     }
 
-    public double getWidth() {
+    public double getWidth(){
         return width;
     }
 
-    public void setWidth(double width) {
+    public void setwidth(double width){
         this.width = width;
     }
 
-    public void printRec() {
-        System.out.println("Height: " + height + " Width: " + width);
-        System.out.println();
+    public void print(){
+        System.out.println("Height: " + height + ", " +  "Width: " + width);
     }
 }
