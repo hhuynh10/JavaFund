@@ -30,5 +30,6 @@ public class MyRectangle2D {
 
     public void printRec() {
         System.out.println("Height: " + height + " Width: " + width);
+        System.out.println();
     }
 }
